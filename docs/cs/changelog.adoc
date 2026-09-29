@@ -1,0 +1,9 @@
+== Historie změn dokumentace
+
+// Revize dokumentace (MAJOR.MINOR.REVIZE). Změny formátu viz CHANGELOG.adoc ve specifikaci.
+=== 2.0.0
+
+* Nová dokumentace formátu `cz-ndic_d2-common` verze 2.0 (DATEX II 3.7); nahrazuje dokumentaci formátu cz-ndic_d2-common-v1.2 (DATEX II 2.3).
+* Změny v obsahu oproti verzi 1.2:
+** Hodnoty výčtů, které model DATEX II 3 zrušil, se vyjadřují obecnou hodnotou s doplňujícím údajem – např. nehoda autobusu je `accidentType` = `accident` s `groupOfVehiclesInvolved/vehicleCharacteristics/vehicleType` = `bus`, převrácené vozidlo `accident` s `groupOfVehiclesInvolved/vehicleStatus` = `overturned`, porouchané nákladní vozidlo `vehicleObstructionType` = `brokenDownVehicle` s `vehicleType` = `lorry`, pomalu jedoucí vozidlo údržby `slowVehicle` s `vehicleUsage` = `roadMaintenanceOrConstruction`.
+** Rychlost větru se uvádí v m/s (dříve km/h podle hlášení ALERT-C).

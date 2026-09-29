@@ -1,0 +1,90 @@
+== Příklady zpráv
+
+Vzorky jsou součástí balíčku specifikace `{schema-uri}.zip` (adresář `samples`). Všechny jsou validní vůči
+schématu DATEX II 3.7 a odpovídají výběru profilu (`.sel`).
+
+=== accident.xml – nehoda nákladního vozidla s uzavřením silnice
+
+Publikace obsahuje jednu situaci: nehodu nákladního vozidla na silnici 450 u obce Staré Město
+(okres Bruntál) a následné uzavření silnice v obou směrech.
+
+[source,xml]
+----
+include::{samplesdir}/accident.xml[tags=**]
+----
+
+Obálka a hlavička::
+Kořen `d2:payload` typu `sit:SituationPublication` s atributy `profileName` a `profileVersion`
+identifikujícími formát; `feedType` odkazuje na zdroj dat, `publicationTime` je čas vytvoření obsahu
+a `publicationCreator` identifikuje NDIC.
+
+Situace::
+Situace má dva záznamy verze 2; `situationVersionTime` je roven času jejich poslední změny.
+První záznam typu `RoadOrCarriagewayOrLaneManagement` popisuje dopad – uzavření silnice (`roadClosed`)
+v obou směrech (`applicableForTrafficDirection` = `bothWays`) se zbytkovou kapacitou 0 v obou směrech
+(`impact` a `impactOnOppositeDirection`) a příčinou `earlierIncident`. Druhý záznam typu `Accident`
+popisuje příčinu – nehodu nákladního vozidla (`accidentInvolvingHeavyLorries`, `vehicleType` = `lorry`)
+se zhoršenou viditelností jako příčinou nehody; `safetyRelatedMessage` ji označuje jako informaci SRTI.
+
+Platnost::
+Oba záznamy platí od 11. 3. 2023 9:30 do 11. 11. 2023 12:35 (`overallStartTime`, `overallEndTime`).
+
+Poloha::
+Bodová událost je popsána liniovou polohou `SingleRoadLinearLocation` třemi metodami: OpenLR,
+ALERT-C (tabulka 25, verze 9.0, lokace 11896 → 11895; `alertCAffectedDirection` = `both` u uzavírky
+v obou směrech, `aligned` u nehody) a jedním
+úsekem Global Network 1620017, jehož počátek a konec nesou tutéž souřadnici WGS-84.
+
+Další obsah::
+`source` uvádí původce informace (PČR), `generalPublicComment` volný popis a `urlLink` odkaz na
+podrobnosti.
+
+=== brokendownvehicles.xml – porouchaná vozidla a pomalý provoz
+
+Publikace obsahuje jednu situaci v ulici Tupolevova v Praze: dvě porouchaná (havarovaná) vozidla blokují
+jízdní pruh a způsobují pomalý provoz.
+
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tags=**]
+----
+
+Záznam typu `AbnormalTraffic` popisuje pomalý provoz (`slowTraffic`) s kolonou dlouhou 160 m
+(`queueLength`) a příčinou `rubberNecking`:
+
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tag=abnormal,indent=0]
+----
+
+Záznam typu `VehicleObstruction` popisuje překážku – dvě porouchaná vozidla:
+
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tag=obstruction,indent=0]
+----
+
+Obálka, platnost a poloha používají stejné struktury jako předchozí příklad; poloha je popsána OpenLR,
+ALERT-C a úsekem Global Network 710586.
+
+=== restriction.xml – práce na silnici, kyvadlový provoz
+
+Publikace obsahuje částečnou uzavírku silnice I/10 v Desné (okres Jablonec nad Nisou)
+kvůli stavebním pracím s kyvadlovým provozem jedním jízdním pruhem.
+
+[source,xml]
+----
+include::{samplesdir}/restriction.xml[tags=**]
+----
+
+Situace::
+Záznam typu `ConstructionWorks` popisuje příčinu (stavební práce, `constructionWork`), záznam typu
+`RoadOrCarriagewayOrLaneManagement` dopad (střídavý provoz jedním pruhem,
+`singleAlternateLineTraffic`, závazně – `complianceOption` = `mandatory`). Hodnota
+`probabilityOfOccurrence` = `certain` – uzavírka v době publikace již platí. Oba záznamy jsou ve verzi 6.
+
+Poloha::
+Poloha je popsána všemi čtyřmi metodami: OpenLR, ALERT-C, staničením silnice 10 (106 797–107 507 m)
+a úseky Global Network verze 22.12. Krajní úseky 126853 a 2901326 jsou `linearWithinLinearElement`
+se souřadnicemi počátku a konce, tři plné vnitřní úseky (126599, 1461717, 1461719) jsou uvedeny
+zkráceně v `externalReferencing`.

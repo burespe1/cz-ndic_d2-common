@@ -1,0 +1,41 @@
+# Metadata formátu – součást vydání specifikace (tag v2.0).
+uri: cz-ndic_d2-common
+version: '2.0'
+name:
+  cs: DATEX II Situation Publication – Běžné dopravní informace
+  en: DATEX II Situation Publication – Common traffic information
+description:
+  cs: 'Dopravní události na celé síti ČR: nehody, uzavírky, práce, omezení, kolony a vlivy počasí.'
+  en: 'Traffic events on the whole Czech road network: accidents, closures, roadworks, restrictions, queues and weather.'
+publisher:
+  cs: Národní dopravní informační centrum
+  en: National Traffic Information Centre
+model:
+  name: DATEX II
+  version: '3.7'
+  publication: SituationPublication
+  extensions: []
+schema:
+  dir: schema
+  entry: DATEXII_3_D2Payload.xsd
+selection: sel/cz-ndic_d2-common.sel
+samples: samples
+ndic:
+  action: upgrade
+  previous: cz-ndic_d2-common-v1.2 (DATEX II 2.3)
+  source: NDIC – dopravní informace (hlášení ALERT-C)
+  distributions:
+  - x-source:cz-ndic_d2-common-v3 (push, delta)
+  - x-source:cz-ndic_d2-common-pull-v3 (pull, snímek)
+  legislation:
+  - SRTI
+  - RTTI
+  profiles:
+  - RRP SRTI
+  - RSP Forecast and Realtime Event Information
+  profileName: cz-ndic_d2-common
+  profileVersion: '2.0'
+maintainer:
+  name: Petr Bureš
+  company: TamTam Research s.r.o.
+  url: https://www.tamtamresearch.com

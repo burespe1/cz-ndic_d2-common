@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<d2:payload xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:com="http://datex2.eu/schema/3/common" xmlns:sit="http://datex2.eu/schema/3/situation" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="sit:SituationPublication" lang="cs" modelBaseVersion="3" profileName="cz-ndic_d2-common" profileVersion="2.0">
+  <!-- tag::header[] -->
+  <com:feedType>x-source:cz-ndic_d2-common-pull-v3</com:feedType>
+  <com:publicationTime>2023-08-30T09:18:24+02:00</com:publicationTime>
+  <com:publicationCreator>
+    <com:country>cz</com:country>
+    <com:nationalIdentifier>NDIC</com:nationalIdentifier>
+  </com:publicationCreator>
+  <!-- end::header[] -->
+  <sit:situation id="ff808181-877b-aada-018a-ef646b376b08">
+    <!-- tag::situation-head[] -->
+    <sit:situationVersionTime>2023-10-02T09:58:05+02:00</sit:situationVersionTime>
+    <sit:headerInformation>
+      <com:confidentiality>noRestriction</com:confidentiality>
+      <com:informationStatus>real</com:informationStatus>
+    </sit:headerInformation>
+    <!-- end::situation-head[] -->
+    <sit:situationRecord xsi:type="sit:AbnormalTraffic" id="ff808181-877b-aada-018a-ef646b376b08_AbnormalTraffic" version="2">
+      <sit:situationRecordCreationTime>2023-10-02T09:58:05+02:00</sit:situationRecordCreationTime>
+      <sit:situationRecordVersionTime>2023-10-02T09:58:05+02:00</sit:situationRecordVersionTime>
+      <sit:probabilityOfOccurrence>certain</sit:probabilityOfOccurrence>
+      <sit:source>
+        <com:sourceIdentification>PCR</com:sourceIdentification>
+      </sit:source>
+      <sit:validity>
+        <com:validityStatus>definedByValidityTimeSpec</com:validityStatus>
+        <com:validityTimeSpecification>
+          <com:overallStartTime>2023-10-02T09:55:00+02:00</com:overallStartTime>
+          <com:overallEndTime>2023-10-02T11:00:00+02:00</com:overallEndTime>
+        </com:validityTimeSpecification>
+      </sit:validity>
+      <sit:cause>
+        <sit:causeType>rubberNecking</sit:causeType>
+      </sit:cause>
+      <sit:generalPublicComment>
+        <sit:comment>
+          <com:values>
+            <com:value lang="cs">Od 2.10.2023 09:55 do 11:00; v ulici Tupolevova v obci Praha okres území Hlavního města Prahy; 2 havarovaná vozidla, pomalý provoz; bez zranění, blokují jeden JP</com:value>
+          </com:values>
+        </sit:comment>
+      </sit:generalPublicComment>
+      <sit:locationReference xsi:type="loc:SingleRoadLinearLocation">
+        <loc:openlrLinear>
+          <loc:firstDirection>
+            <loc:openlrLocationReferencePoint>
+              <loc:openlrCoordinates>
+                <loc:latitude>50.136887007413563</loc:latitude>
+                <loc:longitude>14.504980597632043</loc:longitude>
+              </loc:openlrCoordinates>
+              <loc:openlrLineAttributes>
+                <loc:openlrFunctionalRoadClass>frc4</loc:openlrFunctionalRoadClass>
+                <loc:openlrFormOfWay>multipleCarriageway</loc:openlrFormOfWay>
+                <loc:openlrBearing>350</loc:openlrBearing>
+              </loc:openlrLineAttributes>
+              <loc:openlrPathAttributes>
+                <loc:openlrLowestFrcToNextLRPoint>frc4</loc:openlrLowestFrcToNextLRPoint>
+                <loc:openlrDistanceToNextLRPoint>165</loc:openlrDistanceToNextLRPoint>
+              </loc:openlrPathAttributes>
+            </loc:openlrLocationReferencePoint>
+            <loc:openlrLastLocationReferencePoint>
+              <loc:openlrCoordinates>
+                <loc:latitude>50.138363834263082</loc:latitude>
+                <loc:longitude>14.504772075868614</loc:longitude>
+              </loc:openlrCoordinates>
+              <loc:openlrLineAttributes>
+                <loc:openlrFunctionalRoadClass>frc4</loc:openlrFunctionalRoadClass>
+                <loc:openlrFormOfWay>multipleCarriageway</loc:openlrFormOfWay>
+                <loc:openlrBearing>180</loc:openlrBearing>
+              </loc:openlrLineAttributes>
+            </loc:openlrLastLocationReferencePoint>
+            <loc:openlrOffsets>
+              <loc:openlrPositiveOffset>16</loc:openlrPositiveOffset>
+              <loc:openlrNegativeOffset>4</loc:openlrNegativeOffset>
+            </loc:openlrOffsets>
+          </loc:firstDirection>
+        </loc:openlrLinear>
+        <loc:alertCLinear xsi:type="loc:AlertCMethod2Linear">
+          <loc:alertCLocationCountryCode>2</loc:alertCLocationCountryCode>
+          <loc:alertCLocationTableNumber>25</loc:alertCLocationTableNumber>
+          <loc:alertCLocationTableVersion>10.1</loc:alertCLocationTableVersion>
+          <loc:alertCDirection>
+            <loc:alertCDirectionCoded>positive</loc:alertCDirectionCoded>
+            <loc:alertCAffectedDirection>aligned</loc:alertCAffectedDirection>
+          </loc:alertCDirection>
+          <loc:alertCMethod2PrimaryPointLocation>
+            <loc:alertCLocation>
+              <loc:specificLocation>18231</loc:specificLocation>
+            </loc:alertCLocation>
+          </loc:alertCMethod2PrimaryPointLocation>
+          <loc:alertCMethod2SecondaryPointLocation>
+            <loc:alertCLocation>
+              <loc:specificLocation>10388</loc:specificLocation>
+            </loc:alertCLocation>
+          </loc:alertCMethod2SecondaryPointLocation>
+        </loc:alertCLinear>
+        <loc:linearWithinLinearElement>
+          <loc:directionRelativeOnLinearSection>aligned</loc:directionRelativeOnLinearSection>
+          <loc:linearElement xsi:type="loc:LinearElementByCode">
+            <loc:linearElementReferenceModel>CZ-RSD-GlobalNetwork</loc:linearElementReferenceModel>
+            <loc:linearElementReferenceModelVersion>23.06</loc:linearElementReferenceModelVersion>
+            <loc:linearElementIdentifier>710586</loc:linearElementIdentifier>
+          </loc:linearElement>
+          <loc:fromPoint xsi:type="loc:DistanceFromLinearElementReferent">
+            <loc:distanceAlong>0</loc:distanceAlong>
+            <loc:fromReferent>
+              <loc:referentIdentifier>710586-start</loc:referentIdentifier>
+              <loc:referentType>referenceMarker</loc:referentType>
+              <loc:pointCoordinates>
+                <loc:latitude>50.137993</loc:latitude>
+                <loc:longitude>14.50515</loc:longitude>
+              </loc:pointCoordinates>
+            </loc:fromReferent>
+          </loc:fromPoint>
+          <loc:toPoint xsi:type="loc:DistanceFromLinearElementReferent">
+            <loc:distanceAlong>0</loc:distanceAlong>
+            <loc:fromReferent>
+              <loc:referentIdentifier>710586-end</loc:referentIdentifier>
+              <loc:referentType>referenceMarker</loc:referentType>
+              <loc:pointCoordinates>
+                <loc:latitude>50.13833</loc:latitude>
+                <loc:longitude>14.504771</loc:longitude>
+              </loc:pointCoordinates>
+            </loc:fromReferent>
+          </loc:toPoint>
+        </loc:linearWithinLinearElement>
+      </sit:locationReference>
+      <!-- tag::abnormal[] -->
+      <sit:abnormalTrafficType>slowTraffic</sit:abnormalTrafficType>
+      <sit:queueLength>160</sit:queueLength>
+      <!-- end::abnormal[] -->
+    </sit:situationRecord>
+    <sit:situationRecord xsi:type="sit:VehicleObstruction" id="ff808181-877b-aada-018a-ef646b376b08_VehicleObstruction" version="2">
+      <sit:situationRecordCreationTime>2023-10-02T09:58:05+02:00</sit:situationRecordCreationTime>
+      <sit:situationRecordVersionTime>2023-10-02T09:58:05+02:00</sit:situationRecordVersionTime>
+      <sit:probabilityOfOccurrence>certain</sit:probabilityOfOccurrence>
+      <sit:source>
+        <com:sourceIdentification>PCR</com:sourceIdentification>
+      </sit:source>
+      <sit:validity>
+        <com:validityStatus>definedByValidityTimeSpec</com:validityStatus>
+        <com:validityTimeSpecification>
+          <com:overallStartTime>2023-10-02T09:55:00+02:00</com:overallStartTime>
+          <com:overallEndTime>2023-10-02T11:00:00+02:00</com:overallEndTime>
+        </com:validityTimeSpecification>
+      </sit:validity>
+      <sit:generalPublicComment>
+        <sit:comment>
+          <com:values>
+            <com:value lang="cs">Od 2.10.2023 09:55 do 11:00; v ulici Tupolevova v obci Praha okres území Hlavního města Prahy; 2 havarovaná vozidla, pomalý provoz; bez zranění, blokují jeden JP</com:value>
+          </com:values>
+        </sit:comment>
+      </sit:generalPublicComment>
+      <sit:locationReference xsi:type="loc:SingleRoadLinearLocation">
+        <loc:openlrLinear>
+          <loc:firstDirection>
+            <loc:openlrLocationReferencePoint>
+              <loc:openlrCoordinates>
+                <loc:latitude>50.136887007413563</loc:latitude>
+                <loc:longitude>14.504980597632043</loc:longitude>
+              </loc:openlrCoordinates>
+              <loc:openlrLineAttributes>
+                <loc:openlrFunctionalRoadClass>frc4</loc:openlrFunctionalRoadClass>
+                <loc:openlrFormOfWay>multipleCarriageway</loc:openlrFormOfWay>
+                <loc:openlrBearing>350</loc:openlrBearing>
+              </loc:openlrLineAttributes>
+              <loc:openlrPathAttributes>
+                <loc:openlrLowestFrcToNextLRPoint>frc4</loc:openlrLowestFrcToNextLRPoint>
+                <loc:openlrDistanceToNextLRPoint>165</loc:openlrDistanceToNextLRPoint>
+              </loc:openlrPathAttributes>
+            </loc:openlrLocationReferencePoint>
+            <loc:openlrLastLocationReferencePoint>
+              <loc:openlrCoordinates>
+                <loc:latitude>50.138363834263082</loc:latitude>
+                <loc:longitude>14.504772075868614</loc:longitude>
+              </loc:openlrCoordinates>
+              <loc:openlrLineAttributes>
+                <loc:openlrFunctionalRoadClass>frc4</loc:openlrFunctionalRoadClass>
+                <loc:openlrFormOfWay>multipleCarriageway</loc:openlrFormOfWay>
+                <loc:openlrBearing>180</loc:openlrBearing>
+              </loc:openlrLineAttributes>
+            </loc:openlrLastLocationReferencePoint>
+            <loc:openlrOffsets>
+              <loc:openlrPositiveOffset>161</loc:openlrPositiveOffset>
+              <loc:openlrNegativeOffset>4</loc:openlrNegativeOffset>
+            </loc:openlrOffsets>
+          </loc:firstDirection>
+        </loc:openlrLinear>
+        <loc:alertCLinear xsi:type="loc:AlertCMethod2Linear">
+          <loc:alertCLocationCountryCode>2</loc:alertCLocationCountryCode>
+          <loc:alertCLocationTableNumber>25</loc:alertCLocationTableNumber>
+          <loc:alertCLocationTableVersion>10.1</loc:alertCLocationTableVersion>
+          <loc:alertCDirection>
+            <loc:alertCDirectionCoded>positive</loc:alertCDirectionCoded>
+            <loc:alertCAffectedDirection>aligned</loc:alertCAffectedDirection>
+          </loc:alertCDirection>
+          <loc:alertCMethod2PrimaryPointLocation>
+            <loc:alertCLocation>
+              <loc:specificLocation>18231</loc:specificLocation>
+            </loc:alertCLocation>
+          </loc:alertCMethod2PrimaryPointLocation>
+          <loc:alertCMethod2SecondaryPointLocation>
+            <loc:alertCLocation>
+              <loc:specificLocation>10388</loc:specificLocation>
+            </loc:alertCLocation>
+          </loc:alertCMethod2SecondaryPointLocation>
+        </loc:alertCLinear>
+        <loc:linearWithinLinearElement>
+          <loc:directionRelativeOnLinearSection>aligned</loc:directionRelativeOnLinearSection>
+          <loc:linearElement xsi:type="loc:LinearElementByCode">
+            <loc:linearElementReferenceModel>CZ-RSD-GlobalNetwork</loc:linearElementReferenceModel>
+            <loc:linearElementReferenceModelVersion>23.06</loc:linearElementReferenceModelVersion>
+            <loc:linearElementIdentifier>710586</loc:linearElementIdentifier>
+          </loc:linearElement>
+          <loc:fromPoint xsi:type="loc:DistanceFromLinearElementReferent">
+            <loc:distanceAlong>0</loc:distanceAlong>
+            <loc:fromReferent>
+              <loc:referentIdentifier>710586-start</loc:referentIdentifier>
+              <loc:referentType>referenceMarker</loc:referentType>
+              <loc:pointCoordinates>
+                <loc:latitude>50.13833</loc:latitude>
+                <loc:longitude>14.504771</loc:longitude>
+              </loc:pointCoordinates>
+            </loc:fromReferent>
+          </loc:fromPoint>
+          <loc:toPoint xsi:type="loc:DistanceFromLinearElementReferent">
+            <loc:distanceAlong>0</loc:distanceAlong>
+            <loc:fromReferent>
+              <loc:referentIdentifier>710586-end</loc:referentIdentifier>
+              <loc:referentType>referenceMarker</loc:referentType>
+              <loc:pointCoordinates>
+                <loc:latitude>50.13833</loc:latitude>
+                <loc:longitude>14.504771</loc:longitude>
+              </loc:pointCoordinates>
+            </loc:fromReferent>
+          </loc:toPoint>
+        </loc:linearWithinLinearElement>
+      </sit:locationReference>
+      <!-- tag::obstruction[] -->
+      <sit:numberOfObstructions>2</sit:numberOfObstructions>
+      <sit:vehicleObstructionType>brokenDownVehicle</sit:vehicleObstructionType>
+      <!-- end::obstruction[] -->
+    </sit:situationRecord>
+  </sit:situation>
+</d2:payload>
