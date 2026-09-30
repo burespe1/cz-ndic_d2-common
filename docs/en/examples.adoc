@@ -1,4 +1,93 @@
-== Examples
+== Sample messages
 
-// Sample excerpts via tags – in the sample: <!-- tag::location[] --> … <!-- end::location[] -->
-Samples are part of the specification package `{schema-uri}.zip`.
+The samples are part of the specification package `{schema-uri}.zip` (directory `samples`). All of them are
+valid against the DATEX II 3.7 schema and conform to the profile selection (`.sel`).
+
+=== accident.xml – lorry accident with a road closure
+
+The publication contains one situation: an accident of a lorry on road 450 near the village of Staré Město
+(Bruntál district) and the resulting closure of the road in both directions.
+
+[source,xml]
+----
+include::{samplesdir}/accident.xml[tags=**]
+----
+
+Envelope and header::
+Root `d2:payload` of type `sit:SituationPublication` with the `profileName` and `profileVersion` attributes
+identifying the format; `feedType` refers to the data source, `publicationTime` is the time the content was
+created and `publicationCreator` identifies NDIC.
+
+Situation::
+The situation has two records in version 2; `situationVersionTime` equals the time of their last change.
+The first record of type `RoadOrCarriagewayOrLaneManagement` describes the impact – a road closure
+(`roadClosed`) in both directions (`applicableForTrafficDirection` = `bothWays`) with remaining capacity 0
+in both directions (`impact` and `impactOnOppositeDirection`) and the cause `earlierIncident`. The second
+record of type `Accident` describes the cause – an accident involving a lorry
+(`accidentInvolvingHeavyLorries`, `vehicleType` = `lorry`) with limited visibility as the cause of the
+accident; `safetyRelatedMessage` marks it as SRTI information.
+
+Validity::
+Both records are valid from 11{nbsp}March 2023 9:30 to 11{nbsp}November 2023 12:35 (`overallStartTime`,
+`overallEndTime`).
+
+Location::
+The point-like event is described by the linear location `SingleRoadLinearLocation` using OpenLR, ALERT-C
+(table 25, version 9.0, locations 11896 → 11895; `alertCAffectedDirection` = `both` for the closure in both
+directions, `aligned` for the accident), Global Network section 1620017 and the location path
+`gmlLineString`. The closure covers the whole section (0 → 100{nbsp}%), the accident a short section of
+about 50{nbsp}m at the accident site (21.012 → 70.076{nbsp}%).
+
+Other content::
+`source` gives the originator of the information (Police of the Czech Republic, PČR),
+`generalPublicComment` a free-text description and `urlLink` a link to details.
+
+=== brokendownvehicles.xml – broken-down vehicles and slow traffic
+
+The publication contains one situation in Tupolevova street in Prague: two broken-down (crashed) vehicles
+block a lane and cause slow traffic.
+
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tags=**]
+----
+
+A record of type `AbnormalTraffic` describes slow traffic (`slowTraffic`) with a queue 160 m long
+(`queueLength`) and the cause `rubberNecking`:
+
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tag=abnormal,indent=0]
+----
+
+A record of type `VehicleObstruction` describes the obstruction – two broken-down vehicles:
+
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tag=obstruction,indent=0]
+----
+
+The envelope, validity and location use the same structures as the previous example; the location is
+described by OpenLR, ALERT-C, Global Network section 710586 and the location path `gmlLineString`.
+
+=== restriction.xml – roadworks, alternating one-lane traffic
+
+The publication contains a partial closure of road I/10 in Desná (Jablonec nad Nisou district) due to
+construction works with alternating traffic in one lane.
+
+[source,xml]
+----
+include::{samplesdir}/restriction.xml[tags=**]
+----
+
+Situation::
+A record of type `ConstructionWorks` describes the cause (construction works, `constructionWork`), a record
+of type `RoadOrCarriagewayOrLaneManagement` the impact (alternating traffic in one lane,
+`singleAlternateLineTraffic`, mandatory – `complianceOption` = `mandatory`). The value
+`probabilityOfOccurrence` = `certain` – the closure is already in force at the time of publication. Both
+records are in version 6.
+
+Location::
+The location is described by all four methods: OpenLR, ALERT-C, chainage of road 10 (106 797–107 507 m)
+and Global Network sections of version 22.12 – five sections in travel order (126853–2901326) – and by the
+location path `gmlLineString`.

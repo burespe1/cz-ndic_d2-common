@@ -88,6 +88,9 @@
             </loc:openlrOffsets>
           </loc:firstDirection>
         </loc:openlrLinear>
+        <loc:gmlLineString srsName="EPSG:4326" srsDimension="2">
+          <loc:posList>49.99742 17.44825 49.99827 17.44773</loc:posList>
+        </loc:gmlLineString>
         <loc:alertCLinear xsi:type="loc:AlertCMethod2Linear">
           <loc:alertCLocationCountryCode>2</loc:alertCLocationCountryCode>
           <loc:alertCLocationTableNumber>25</loc:alertCLocationTableNumber>
@@ -114,27 +117,11 @@
             <loc:linearElementReferenceModelVersion>22.12</loc:linearElementReferenceModelVersion>
             <loc:linearElementIdentifier>1620017</loc:linearElementIdentifier>
           </loc:linearElement>
-          <loc:fromPoint xsi:type="loc:DistanceFromLinearElementReferent">
-            <loc:distanceAlong>0</loc:distanceAlong>
-            <loc:fromReferent>
-              <loc:referentIdentifier>1620017-start</loc:referentIdentifier>
-              <loc:referentType>referenceMarker</loc:referentType>
-              <loc:pointCoordinates>
-                <loc:latitude>49.997803</loc:latitude>
-                <loc:longitude>17.448015</loc:longitude>
-              </loc:pointCoordinates>
-            </loc:fromReferent>
+          <loc:fromPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
+            <loc:percentageDistanceAlong>0</loc:percentageDistanceAlong>
           </loc:fromPoint>
-          <loc:toPoint xsi:type="loc:DistanceFromLinearElementReferent">
-            <loc:distanceAlong>0</loc:distanceAlong>
-            <loc:fromReferent>
-              <loc:referentIdentifier>1620017-end</loc:referentIdentifier>
-              <loc:referentType>referenceMarker</loc:referentType>
-              <loc:pointCoordinates>
-                <loc:latitude>49.997803</loc:latitude>
-                <loc:longitude>17.448015</loc:longitude>
-              </loc:pointCoordinates>
-            </loc:fromReferent>
+          <loc:toPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
+            <loc:percentageDistanceAlong>100</loc:percentageDistanceAlong>
           </loc:toPoint>
         </loc:linearWithinLinearElement>
       </sit:locationReference>
@@ -210,11 +197,14 @@
               </loc:openlrLineAttributes>
             </loc:openlrLastLocationReferencePoint>
             <loc:openlrOffsets>
-              <loc:openlrPositiveOffset>211</loc:openlrPositiveOffset>
-              <loc:openlrNegativeOffset>431</loc:openlrNegativeOffset>
+              <loc:openlrPositiveOffset>186</loc:openlrPositiveOffset>
+              <loc:openlrNegativeOffset>406</loc:openlrNegativeOffset>
             </loc:openlrOffsets>
           </loc:firstDirection>
         </loc:openlrLinear>
+        <loc:gmlLineString srsName="EPSG:4326" srsDimension="2">
+          <loc:posList>49.99760 17.44814 49.99802 17.44789</loc:posList>
+        </loc:gmlLineString>
         <loc:alertCLinear xsi:type="loc:AlertCMethod2Linear">
           <loc:alertCLocationCountryCode>2</loc:alertCLocationCountryCode>
           <loc:alertCLocationTableNumber>25</loc:alertCLocationTableNumber>
@@ -241,27 +231,11 @@
             <loc:linearElementReferenceModelVersion>22.12</loc:linearElementReferenceModelVersion>
             <loc:linearElementIdentifier>1620017</loc:linearElementIdentifier>
           </loc:linearElement>
-          <loc:fromPoint xsi:type="loc:DistanceFromLinearElementReferent">
-            <loc:distanceAlong>0</loc:distanceAlong>
-            <loc:fromReferent>
-              <loc:referentIdentifier>1620017-start</loc:referentIdentifier>
-              <loc:referentType>referenceMarker</loc:referentType>
-              <loc:pointCoordinates>
-                <loc:latitude>49.997803</loc:latitude>
-                <loc:longitude>17.448015</loc:longitude>
-              </loc:pointCoordinates>
-            </loc:fromReferent>
+          <loc:fromPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
+            <loc:percentageDistanceAlong>21.012</loc:percentageDistanceAlong>
           </loc:fromPoint>
-          <loc:toPoint xsi:type="loc:DistanceFromLinearElementReferent">
-            <loc:distanceAlong>0</loc:distanceAlong>
-            <loc:fromReferent>
-              <loc:referentIdentifier>1620017-end</loc:referentIdentifier>
-              <loc:referentType>referenceMarker</loc:referentType>
-              <loc:pointCoordinates>
-                <loc:latitude>49.997803</loc:latitude>
-                <loc:longitude>17.448015</loc:longitude>
-              </loc:pointCoordinates>
-            </loc:fromReferent>
+          <loc:toPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
+            <loc:percentageDistanceAlong>70.076</loc:percentageDistanceAlong>
           </loc:toPoint>
         </loc:linearWithinLinearElement>
       </sit:locationReference>

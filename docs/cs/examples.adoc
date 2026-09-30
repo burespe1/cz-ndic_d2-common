@@ -30,10 +30,11 @@ Platnost::
 Oba záznamy platí od 11. 3. 2023 9:30 do 11. 11. 2023 12:35 (`overallStartTime`, `overallEndTime`).
 
 Poloha::
-Bodová událost je popsána liniovou polohou `SingleRoadLinearLocation` třemi metodami: OpenLR,
+Bodová událost je popsána liniovou polohou `SingleRoadLinearLocation` metodami OpenLR,
 ALERT-C (tabulka 25, verze 9.0, lokace 11896 → 11895; `alertCAffectedDirection` = `both` u uzavírky
-v obou směrech, `aligned` u nehody) a jedním
-úsekem Global Network 1620017, jehož počátek a konec nesou tutéž souřadnici WGS-84.
+v obou směrech, `aligned` u nehody) a úsekem Global Network 1620017 a průběhem polohy `gmlLineString`.
+Uzavírka zahrnuje celý úsek (0 → 100{nbsp}%), nehoda krátký úsek asi 50{nbsp}m v místě nehody
+(21,012 → 70,076{nbsp}%).
 
 Další obsah::
 `source` uvádí původce informace (PČR), `generalPublicComment` volný popis a `urlLink` odkaz na
@@ -65,7 +66,7 @@ include::{samplesdir}/brokendownvehicles.xml[tag=obstruction,indent=0]
 ----
 
 Obálka, platnost a poloha používají stejné struktury jako předchozí příklad; poloha je popsána OpenLR,
-ALERT-C a úsekem Global Network 710586.
+ALERT-C, úsekem Global Network 710586 a průběhem polohy `gmlLineString`.
 
 === restriction.xml – práce na silnici, kyvadlový provoz
 
@@ -85,6 +86,5 @@ Záznam typu `ConstructionWorks` popisuje příčinu (stavební práce, `constru
 
 Poloha::
 Poloha je popsána všemi čtyřmi metodami: OpenLR, ALERT-C, staničením silnice 10 (106 797–107 507 m)
-a úseky Global Network verze 22.12. Krajní úseky 126853 a 2901326 jsou `linearWithinLinearElement`
-se souřadnicemi počátku a konce, tři plné vnitřní úseky (126599, 1461717, 1461719) jsou uvedeny
-zkráceně v `externalReferencing`.
+a úseky Global Network verze 22.12: pět úseků v pořadí jízdy (126853–2901326), a průběhem
+polohy `gmlLineString`.
