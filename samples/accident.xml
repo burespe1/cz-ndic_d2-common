@@ -232,10 +232,10 @@
             <loc:linearElementIdentifier>1620017</loc:linearElementIdentifier>
           </loc:linearElement>
           <loc:fromPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
-            <loc:percentageDistanceAlong>21.012</loc:percentageDistanceAlong>
+            <loc:percentageDistanceAlong>21.01</loc:percentageDistanceAlong>
           </loc:fromPoint>
           <loc:toPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
-            <loc:percentageDistanceAlong>70.076</loc:percentageDistanceAlong>
+            <loc:percentageDistanceAlong>70.08</loc:percentageDistanceAlong>
           </loc:toPoint>
         </loc:linearWithinLinearElement>
       </sit:locationReference>

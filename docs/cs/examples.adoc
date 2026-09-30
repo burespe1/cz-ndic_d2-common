@@ -1,7 +1,6 @@
 == Příklady zpráv
 
-Vzorky jsou součástí balíčku specifikace `{schema-uri}.zip` (adresář `samples`). Všechny jsou validní vůči
-schématu DATEX II 3.7 a odpovídají výběru profilu (`.sel`).
+Vzorky jsou součástí balíčku specifikace `{schema-uri}.zip` (adresář `samples`).
 
 === accident.xml – nehoda nákladního vozidla s uzavřením silnice
 
@@ -34,7 +33,7 @@ Bodová událost je popsána liniovou polohou `SingleRoadLinearLocation` metodam
 ALERT-C (tabulka 25, verze 9.0, lokace 11896 → 11895; `alertCAffectedDirection` = `both` u uzavírky
 v obou směrech, `aligned` u nehody) a úsekem Global Network 1620017 a průběhem polohy `gmlLineString`.
 Uzavírka zahrnuje celý úsek (0 → 100{nbsp}%), nehoda krátký úsek asi 50{nbsp}m v místě nehody
-(21,012 → 70,076{nbsp}%).
+(21,01 → 70,08{nbsp}%).
 
 Další obsah::
 `source` uvádí původce informace (PČR), `generalPublicComment` volný popis a `urlLink` odkaz na

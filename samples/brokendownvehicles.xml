@@ -105,10 +105,10 @@
             <loc:linearElementIdentifier>710586</loc:linearElementIdentifier>
           </loc:linearElement>
           <loc:fromPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
-            <loc:percentageDistanceAlong>0.156</loc:percentageDistanceAlong>
+            <loc:percentageDistanceAlong>0.16</loc:percentageDistanceAlong>
           </loc:fromPoint>
           <loc:toPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
-            <loc:percentageDistanceAlong>97.576</loc:percentageDistanceAlong>
+            <loc:percentageDistanceAlong>97.58</loc:percentageDistanceAlong>
           </loc:toPoint>
         </loc:linearWithinLinearElement>
       </sit:locationReference>
@@ -203,10 +203,10 @@
             <loc:linearElementIdentifier>710586</loc:linearElementIdentifier>
           </loc:linearElement>
           <loc:fromPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
-            <loc:percentageDistanceAlong>94.576</loc:percentageDistanceAlong>
+            <loc:percentageDistanceAlong>94.58</loc:percentageDistanceAlong>
           </loc:fromPoint>
           <loc:toPoint xsi:type="loc:PercentageDistanceAlongLinearElement">
-            <loc:percentageDistanceAlong>97.576</loc:percentageDistanceAlong>
+            <loc:percentageDistanceAlong>97.58</loc:percentageDistanceAlong>
           </loc:toPoint>
         </loc:linearWithinLinearElement>
       </sit:locationReference>

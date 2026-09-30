@@ -1,7 +1,6 @@
 == Sample messages
 
-The samples are part of the specification package `{schema-uri}.zip` (directory `samples`). All of them are
-valid against the DATEX II 3.7 schema and conform to the profile selection (`.sel`).
+The samples are part of the specification package `{schema-uri}.zip` (directory `samples`).
 
 === accident.xml – lorry accident with a road closure
 
@@ -36,7 +35,7 @@ The point-like event is described by the linear location `SingleRoadLinearLocati
 (table 25, version 9.0, locations 11896 → 11895; `alertCAffectedDirection` = `both` for the closure in both
 directions, `aligned` for the accident), Global Network section 1620017 and the location path
 `gmlLineString`. The closure covers the whole section (0 → 100{nbsp}%), the accident a short section of
-about 50{nbsp}m at the accident site (21.012 → 70.076{nbsp}%).
+about 50{nbsp}m at the accident site (21.01 → 70.08{nbsp}%).
 
 Other content::
 `source` gives the originator of the information (Police of the Czech Republic, PČR),

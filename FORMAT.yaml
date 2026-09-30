@@ -23,13 +23,6 @@ samples: samples
 ndic:
   action: upgrade
   previous: cz-ndic_d2-common-v1.2 (DATEX II 2.3)
-  source: NDIC – dopravní informace (hlášení ALERT-C)
-  distributions:
-  - x-source:cz-ndic_d2-common-v3 (push, delta)
-  - x-source:cz-ndic_d2-common-pull-v3 (pull, snímek)
-  legislation:
-  - SRTI
-  - RTTI
   profiles:
   - RRP SRTI
   - RSP Forecast and Realtime Event Information
