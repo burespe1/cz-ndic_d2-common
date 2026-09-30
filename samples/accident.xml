@@ -8,8 +8,8 @@
     <com:nationalIdentifier>NDIC</com:nationalIdentifier>
   </com:publicationCreator>
   <!-- end::header[] -->
+  <!-- tag::situation-head[] -->
   <sit:situation id="ff808181-83c8-5229-0186-cfcf07786763">
-    <!-- tag::situation-head[] -->
     <sit:situationVersionTime>2023-03-11T09:37:09+01:00</sit:situationVersionTime>
     <sit:headerInformation>
       <com:confidentiality>noRestriction</com:confidentiality>
@@ -147,8 +147,8 @@
       <sit:roadOrCarriagewayOrLaneManagementType>roadClosed</sit:roadOrCarriagewayOrLaneManagementType>
       <!-- end::closure[] -->
     </sit:situationRecord>
+    <!-- tag::record-meta[] -->
     <sit:situationRecord xsi:type="sit:Accident" id="ff808181-83c8-5229-0186-cfcf07786763_Accident" version="2">
-      <!-- tag::record-meta[] -->
       <sit:situationRecordCreationTime>2023-03-11T09:37:09+01:00</sit:situationRecordCreationTime>
       <sit:situationRecordVersionTime>2023-03-11T09:37:09+01:00</sit:situationRecordVersionTime>
       <sit:probabilityOfOccurrence>certain</sit:probabilityOfOccurrence>
