@@ -42,6 +42,8 @@
    `cz-ndic_d2-weather`. Ručně hlášené povětrnostní události zůstávají v tomto formátu.
 ** Profil je zúžen na prvky a hodnoty výčtů, které NDIC publikuje nebo které plní hlášení ALERT-C; vypuštěné
    hodnoty ALERT-C se vyjadřují obecnější hodnotou (např. tenisový turnaj `sportsMeeting`).
+** Obecná místa platnosti řízení provozu (`placesAtWhichApplicable`, např. „v tunelech“) se neuvádějí –
+   událost se vždy týká konkrétní polohy.
 * Původ dat:
 ** Většina událostí vzniká z hlášení ALERT-C (kódy událostí a kvantifikátory podle <<ISO14819-2>>).
 ** Směrovost události (`alertCAffectedDirection`) vychází ze směrovosti v katalogu událostí ALERT-C <<ISO14819-2>>.
