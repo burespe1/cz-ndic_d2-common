@@ -79,7 +79,7 @@
           </loc:firstDirection>
         </loc:openlrLinear>
         <!-- gmlLineString -->
-        <loc:gmlLineString srsName="EPSG:4326" srsDimension="2">
+        <loc:gmlLineString srsName="urn:ogc:def:crs:EPSG::4258" srsDimension="2">
           <loc:posList>50.12557 13.33540 50.12656 13.33340 50.12774 13.33177 50.13117 13.32873</loc:posList>
         </loc:gmlLineString>
         <!-- ALERT-C -->
