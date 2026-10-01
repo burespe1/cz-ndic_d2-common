@@ -7,25 +7,25 @@
   cz-ndic_d2-common-v1.2 (DATEX II 2.3).
 * Změny oproti verzi 1.2 (DATEX II 2.3):
 ** Formát je převeden na model DATEX II 3.7 bez národních rozšíření. Obálky `d2LogicalModel` a `exchange`
-   se nepoužívají; kořen je `d2:payload`, formát určují atributy `profileName` a `profileVersion`.
+   se nepoužívají; kořen je `d2:payload`, formát určují atributy `@profileName` a `@profileVersion`.
 ** `safetyRelatedMessage` je součástí modelu (dříve národní rozšíření).
 ** Národní rozšíření polohy (`linearExtension`, `globalNetworkLinear`, `openlrExtendedLinear`) nahradily
    prvky modelu 3.7: OpenLR v `openlrLinear`, úseky Global Network v `linearWithinLinearElement`
-   s `LinearElementByCode`.
+   s `loc:LinearElementByCode`.
 ** Počátek a konec polohy GN (`startPoint`, `endPoint` v S-JTSK) nahradil průběh polohy v ETRS89
    (`gmlLineString`); krajní úseky GN mají procenta.
 ** Nový povinný prvek `alertCAffectedDirection`.
-** Bodové polohy (`PointLocation`) ani plošné polohy (`AreaLocation`) se nepoužívají; bodové místo je krátký
+** Bodové polohy (`loc:PointLocation`) ani plošné polohy (`loc:AreaLocation`) se nepoužívají; bodové místo je krátký
    liniový úsek, oblast výčet liniových úseků.
 ** Upřesnění polohy (`supplementaryPositionalDescription`) má strukturu modelu 3.7: jízdní pás a pruhy
    (dříve `affectedCarriagewayAndLanes`) jsou v `carriageway` s `lane/laneUsage`, popis místa (dříve
    `locationDescriptor`) v `infrastructureDescriptor`, resp. `geographicDescriptor`.
 ** `trafficConstrictionType` se uvádí přímo v záznamu (dříve v `impact`), a to jen u záznamů, které ho
    v modelu 3.7 mají (nehody, překážky, aktivity, podmínky, dopravní proud); u prací na silnici rozsah omezení
-   vyjadřuje záznam `RoadOrCarriagewayOrLaneManagement` a `impact`.
-** Poloha se nepopisuje jednou liniovou polohou přes více komunikací: `SingleRoadLinearLocation` je souvislý
+   vyjadřuje záznam `sit:RoadOrCarriagewayOrLaneManagement` a `impact`.
+** Poloha se nepopisuje jednou liniovou polohou přes více komunikací: `loc:SingleRoadLinearLocation` je souvislý
    úsek jedné komunikace s nejvýše jedním `alertCLinear`, souvislá trasa přes více komunikací je
-   `ItineraryByIndexedLocations` a nesouvislá nebo rozvětvená poloha `LocationGroupByList`.
+   `loc:ItineraryByIndexedLocations` a nesouvislá nebo rozvětvená poloha `loc:LocationGroupByList`.
 ** Hodnoty výčtů, které model DATEX II 3 zrušil, se vyjadřují obecnou hodnotou s doplňujícím údajem – např.
    nehoda autobusu je `accidentType` = `accident` s `groupOfVehiclesInvolved/vehicleCharacteristics/vehicleType`
    = `bus`, převrácené vozidlo `accident` s `groupOfVehiclesInvolved/vehicleStatus` = `overturned`,
@@ -47,5 +47,5 @@
 * Původ dat:
 ** Většina událostí vzniká z hlášení ALERT-C (kódy událostí a kvantifikátory podle <<ISO14819-2>>).
 ** Směrovost události (`alertCAffectedDirection`) vychází ze směrovosti v katalogu událostí ALERT-C <<ISO14819-2>>.
-** Objížďky (`ReroutingManagement`) a dočasné omezení rychlosti (`SpeedManagement.temporarySpeedLimit`) jsou
+** Objížďky (`sit:ReroutingManagement`) a dočasné omezení rychlosti (`sit:SpeedManagement/temporarySpeedLimit`) jsou
    v profilu ponechány pro budoucí zdroje událostí.

@@ -13,14 +13,14 @@ include::{samplesdir}/accident.xml[tags=**]
 ----
 
 Obálka a hlavička::
-Kořen `d2:payload` typu `sit:SituationPublication` s atributy `profileName` a `profileVersion`
+Kořen `d2:payload` typu `sit:SituationPublication` s atributy `@profileName` a `@profileVersion`
 identifikujícími formát; `feedType` odkazuje na zdroj dat, `publicationTime` je čas vytvoření obsahu
 a `publicationCreator` identifikuje NDIC.
 
 Situace::
 Situace má tři záznamy ve verzi 6 se zdrojem PČR (`PCR`); `situationVersionTime` je roven času jejich poslední
-změny. Záznam typu `Accident` popisuje nehodu (`accident`), záznam `GeneralObstruction` překážku na vozovce
-(`objectOnTheRoad`) a záznam `RoadOrCarriagewayOrLaneManagement` důsledek – krátkodobé uzavírání silnice
+změny. Záznam typu `sit:Accident` popisuje nehodu (`accident`), záznam `sit:GeneralObstruction` překážku na vozovce
+(`objectOnTheRoad`) a záznam `sit:RoadOrCarriagewayOrLaneManagement` důsledek – krátkodobé uzavírání silnice
 (`intermittentShortTermClosures`), závazně (`complianceOption` = `mandatory`). Příčina a důsledek jsou samostatné
 záznamy jedné situace; komentář je uveden u každého z nich.
 
@@ -42,8 +42,8 @@ include::{samplesdir}/brokendownvehicles.xml[tags=**]
 ----
 
 Situace::
-Dva záznamy ve verzi 2 se zdrojem ŘSD (`RSD`): `VehicleObstruction` – porouchané vozidlo (`brokenDownVehicle`)
-a `GeneralObstruction` (`other`). Oba uvádějí zablokovaný jízdní pruh (`trafficConstrictionType` = `lanesBlocked`)
+Dva záznamy ve verzi 2 se zdrojem ŘSD (`RSD`): `sit:VehicleObstruction` – porouchané vozidlo (`brokenDownVehicle`)
+a `sit:GeneralObstruction` (`other`). Oba uvádějí zablokovaný jízdní pruh (`trafficConstrictionType` = `lanesBlocked`)
 a v elementu `impact` jeden omezený pruh (`numberOfLanesRestricted`):
 +
 [source,xml]
@@ -75,7 +75,7 @@ include::{samplesdir}/queue.xml[tags=**]
 ----
 
 Situace::
-Jeden záznam typu `AbnormalTraffic` – kolona (`queuingTraffic`) ve verzi 8. Zdrojem jsou data plovoucích vozidel
+Jeden záznam typu `sit:AbnormalTraffic` – kolona (`queuingTraffic`) ve verzi 8. Zdrojem jsou data plovoucích vozidel
 (`sourceIdentification` = `FCD`, `sourceName` „Data FCD“); s každou aktualizací se zvyšuje verze záznamu
 a posouvá konec platnosti:
 +
@@ -102,8 +102,8 @@ include::{samplesdir}/restriction.xml[tags=**]
 ----
 
 Situace::
-Záznam typu `MaintenanceWorks` popisuje příčinu (práce na silnici, `roadworks`, předmět prací vozovka – `road`),
-záznam typu `RoadOrCarriagewayOrLaneManagement` dopad (střídavý provoz jedním pruhem,
+Záznam typu `sit:MaintenanceWorks` popisuje příčinu (práce na silnici, `roadworks`, předmět prací vozovka – `road`),
+záznam typu `sit:RoadOrCarriagewayOrLaneManagement` dopad (střídavý provoz jedním pruhem,
 `singleAlternateLineTraffic`, závazně – `complianceOption` = `mandatory`). Práce jsou naplánované, proto
 `probabilityOfOccurrence` = `certain` a počátek platnosti leží v budoucnosti. Oba záznamy jsou ve verzi 2.
 
@@ -126,7 +126,7 @@ include::{samplesdir}/works-prague.xml[tags=**]
 ----
 
 Situace::
-Záznam typu `ConstructionWorks` (`constructionWork`) a záznam typu `RoadOrCarriagewayOrLaneManagement` –
+Záznam typu `sit:ConstructionWorks` (`constructionWork`) a záznam typu `sit:RoadOrCarriagewayOrLaneManagement` –
 provoz v protisměrném pruhu (`contraflow`), oba ve verzi 6. Oba záznamy nesou odkaz na stránku s podrobnostmi
 (`urlLink`, `urlLinkType` = `html`).
 
@@ -147,8 +147,8 @@ include::{samplesdir}/lane-closure.xml[tags=**]
 ----
 
 Situace::
-Záznam typu `MaintenanceWorks` popisuje příčinu (práce na silnici, `roadworks`, předmět prací vozovka – `road`),
-záznam typu `RoadOrCarriagewayOrLaneManagement` dopad – uzavření jízdního pruhu (`laneClosures`), závazně.
+Záznam typu `sit:MaintenanceWorks` popisuje příčinu (práce na silnici, `roadworks`, předmět prací vozovka – `road`),
+záznam typu `sit:RoadOrCarriagewayOrLaneManagement` dopad – uzavření jízdního pruhu (`laneClosures`), závazně.
 Oba záznamy jsou ve verzi 5 a uvádějí jeden průjezdný jízdní pruh (`numberOfOperationalLanes`):
 +
 [source,xml]
@@ -182,14 +182,14 @@ include::{samplesdir}/closure-junction.xml[tags=**]
 ----
 
 Situace::
-Jeden záznam typu `RoadOrCarriagewayOrLaneManagement` ve verzi 5: uzavření silnice (`roadClosed`) v obou
+Jeden záznam typu `sit:RoadOrCarriagewayOrLaneManagement` ve verzi 5: uzavření silnice (`roadClosed`) v obou
 směrech se zbytkovou kapacitou 0, závazně (`complianceOption` = `mandatory`).
 
 Platnost::
 Od 7.{nbsp}10.{nbsp}2026 10:01 do 31.{nbsp}10.{nbsp}2026 23:59.
 
 Poloha::
-`LocationGroupByList` se třemi liniovými polohami, každou na jedné komunikaci: silnice II/259 (dva úseky
+`loc:LocationGroupByList` se třemi liniovými polohami, každou na jedné komunikaci: silnice II/259 (dva úseky
 Global Network v pořadí jízdy), nečíslovaná spojka (jeden úsek) a silnice III/25924 (jeden úsek). Každá poloha
 nese vlastní průběh `gmlLineString`; úseky slouží oběma směrům (`directionRelativeOnLinearSection` = `both`).
 
@@ -204,14 +204,14 @@ include::{samplesdir}/closure-route.xml[tags=**]
 ----
 
 Situace::
-Jeden záznam typu `RoadOrCarriagewayOrLaneManagement` ve verzi 4: uzavření silnice (`roadClosed`) v obou
+Jeden záznam typu `sit:RoadOrCarriagewayOrLaneManagement` ve verzi 4: uzavření silnice (`roadClosed`) v obou
 směrech se zbytkovou kapacitou 0, závazně.
 
 Platnost::
 Od 21.{nbsp}9.{nbsp}2026 7:00 do 1.{nbsp}10.{nbsp}2026 23:59.
 
 Poloha::
-`ItineraryByIndexedLocations` se dvěma částmi v pořadí jízdy: část 1 na silnici III/34041 (čtyři úseky Global
+`loc:ItineraryByIndexedLocations` se dvěma částmi v pořadí jízdy: část 1 na silnici III/34041 (čtyři úseky Global
 Network), část 2 na navazující silnici III/34042 (čtyři úseky). Každá část je liniová poloha
-`SingleRoadLinearLocation` s vlastním průběhem `gmlLineString`; konec první části je počátkem druhé. Úseky slouží
+`loc:SingleRoadLinearLocation` s vlastním průběhem `gmlLineString`; konec první části je počátkem druhé. Úseky slouží
 oběma směrům (`directionRelativeOnLinearSection` = `both`).
