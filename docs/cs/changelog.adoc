@@ -15,7 +15,14 @@
 ** Počátek a konec polohy GN (`startPoint`, `endPoint` v S-JTSK) nahradil průběh polohy ve WGS-84
    (`gmlLineString`); krajní úseky GN mají procenta.
 ** Nový povinný prvek `alertCAffectedDirection`.
-** Bodové polohy (`PointLocation`) se nepoužívají; bodové místo je krátký liniový úsek.
+** Bodové polohy (`PointLocation`) ani plošné polohy (`AreaLocation`) se nepoužívají; bodové místo je krátký
+   liniový úsek, oblast výčet liniových úseků.
+** Upřesnění polohy (`supplementaryPositionalDescription`) má strukturu modelu 3.7: jízdní pás a pruhy
+   (dříve `affectedCarriagewayAndLanes`) jsou v `carriageway` s `lane/laneUsage`, popis místa (dříve
+   `locationDescriptor`) v `infrastructureDescriptor`, resp. `geographicDescriptor`.
+** `trafficConstrictionType` se uvádí přímo v záznamu (dříve v `impact`), a to jen u záznamů, které ho
+   v modelu 3.7 mají (nehody, překážky, aktivity, podmínky, dopravní proud); u prací na silnici rozsah omezení
+   vyjadřuje záznam `RoadOrCarriagewayOrLaneManagement` a `impact`.
 ** Poloha se nepopisuje jednou liniovou polohou přes více komunikací: `SingleRoadLinearLocation` je souvislý
    úsek jedné komunikace s nejvýše jedním `alertCLinear`, souvislá trasa přes více komunikací je
    `ItineraryByIndexedLocations` a nesouvislá nebo rozvětvená poloha `LocationGroupByList`.
@@ -25,6 +32,16 @@
    porouchané nákladní vozidlo `vehicleObstructionType` = `brokenDownVehicle` s `vehicleType` = `lorry`,
    pomalu jedoucí vozidlo údržby `slowVehicle` s `vehicleUsage` = `roadMaintenanceOrConstruction`.
 ** Rychlost větru se uvádí v m/s (dříve km/h podle hlášení ALERT-C).
+** Nepoužívají se: popis zdroje dat `feedDescription` (zdroj určuje `feedType`), souhrnný záznam situace
+   `situationSummary` (souhrn by musel mít vlastní polohu, platnost a povinné prvky typu; komentáře zůstávají
+   v jednotlivých záznamech), cíl trasy `routeDestination` a opakované intervaly platnosti jiné než denní
+   časový úsek (`recurringTimePeriodOfDay`).
+** Informace o obsazenosti parkovišť (záznamy `CarParks`) formát neobsahuje; poskytuje je samostatný formát
+   `cz-ndic_d2-city-parking-status`.
+** Výstrahy vygenerované meteohláskami (s odkazem na úsek meteohlásky) formát neobsahuje; poskytuje je formát
+   `cz-ndic_d2-weather`. Ručně hlášené povětrnostní události zůstávají v tomto formátu.
+** Profil je zúžen na prvky a hodnoty výčtů, které NDIC publikuje nebo které plní hlášení ALERT-C; vypuštěné
+   hodnoty ALERT-C se vyjadřují obecnější hodnotou (např. tenisový turnaj `sportsMeeting`).
 * Původ dat:
 ** Většina událostí vzniká z hlášení ALERT-C (kódy událostí a kvantifikátory podle <<ISO14819-2>>).
 ** Směrovost události (`alertCAffectedDirection`) vychází ze směrovosti v katalogu událostí ALERT-C <<ISO14819-2>>.

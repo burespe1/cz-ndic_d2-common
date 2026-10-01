@@ -4,9 +4,9 @@ Formát poskytuje obecné informace o dopravní situaci na silniční síti ČR:
 uzavírky a omezení, práce na silnici, akce správce komunikace a vlivy počasí na sjízdnost.
 
 Uzavírky a omezení jsou zároveň samostatně publikovány formátem `cz-ndic_d2-restrictions`, který je
-podmnožinou tohoto formátu. Informace o obsazenosti parkovišť do formátu nepatří (viz formáty
-`cz-ndic_d2-city-parking-*`), stejně jako jakékoli stavové informace (např. rychlosti z FCD, viz
-`cz-ndic_d2-fcd-status`).
+podmnožinou tohoto formátu. Obsazenost parkovišť poskytují formáty `cz-ndic_d2-city-parking-*`, stavové
+informace (např. rychlosti z FCD) formát `cz-ndic_d2-fcd-status` a výstrahy meteohlásek formát
+`cz-ndic_d2-weather`.
 
 Formát vychází z DATEX II publikace `SituationPublication` <<EN16157-3>>. Používá model DATEX II 3.7 bez národních rozšíření.
 
@@ -27,7 +27,8 @@ Hlavička publikace obsahuje:
 
 * `feedType` – identifikátor zdroje dat (distribuce) v registru národního přístupového bodu <<nap>>.
   Zdroj odkazuje na formát, ve kterém data poskytuje; formát zprávy určují atributy `profileName`
-  a `profileVersion`. Element `feedDescription` se nepoužívá.
+  a `profileVersion`. Tentýž formát
+  může používat více zdrojů s různým `feedType`.
 * `publicationTime` – čas vytvoření obsahu publikace. Pokud se obsah od předchozí publikace nezměnil,
   zůstává čas původní; nový čas vzniká jen se
   změnou obsahu.
@@ -84,18 +85,16 @@ include::{samplesdir}/accident.xml[tag=record-meta,indent=0]
 </sit:situationRecord>
 ----
 
-* `probabilityOfOccurrence` – `certain` pro nastalou událost, `probable` pro pravděpodobnou,
-  `riskOf` pro plánovanou událost, která zatím nenastala.
+* `probabilityOfOccurrence` – `certain` pro událost, která nastala, i pro plánovanou událost (ta má počátek
+  platnosti v budoucnu, viz <<platnost>>); `probable` pro dosud neověřenou informaci (předběžné hlášení
+  z nepotvrzeného zdroje), `riskOf` pro hrozící jev, o kterém není jisté, zda nastane.
 * `safetyRelatedMessage` – `true` označuje informaci související s bezpečností silničního provozu podle
   nařízení v přenesené pravomoci (EU) č. 886/2013 (SRTI).
 * `source` – kdo informaci vytvořil a odpovídá za její správnost (`sourceIdentification`, případně
   `sourceName`).
-* `generalPublicComment` – volný popis události jejím tvůrcem, zpravidla česky.
+* `generalPublicComment` – volný popis události jejím tvůrcem, zpravidla česky. Uvádí se u každého záznamu situace
+  (zpravidla stejný text), aby byl každý záznam srozumitelný i samostatně.
 * `urlLink` – odkaz na webovou stránku s podrobnostmi o události (`urlLinkType` = `html`).
-
-NOTE: Souhrnný záznam situace (`situationSummary`), který model 3.7 nabízí, se zatím nepoužívá: souhrn
-musí mít vlastní polohu, platnost a povinné prvky typu, takže zprávy prodlužuje. Komentáře zůstávají
-v jednotlivých záznamech.
 
 .Komentář a odkaz na podrobnosti (vzorek `accident.xml`)
 [source,xml]
@@ -117,54 +116,23 @@ Typ záznamu (`xsi:type` elementu `situationRecord`) určuje, co se stalo. Form�
 `EnvironmentalObstruction`, `InfrastructureDamageObstruction`
 |Aktivity |`PublicEvent`, `DisturbanceActivity`, `AuthorityOperation`
 |Podmínky provozu |`WeatherRelatedRoadConditions` (stav vozovky vlivem počasí), `NonWeatherRelatedRoadConditions`
-(písek, olej, rozsypaný náklad), `PoorEnvironmentConditions` (srážky, viditelnost, vítr, teplota)
+(písek, olej, rozsypaný náklad), `PoorEnvironmentConditions` (srážky, viditelnost, vítr – rychlost v m/s, teplota),
+`Conditions` (sjízdnost, např. sjízdné se zvýšenou opatrností)
 |Práce na silnici |`ConstructionWorks`, `MaintenanceWorks`
 |Řízení provozu |`RoadOrCarriagewayOrLaneManagement` (uzavírky, změny uspořádání), `ReroutingManagement`
-(objížďky), `SpeedManagement` (omezení rychlosti), `WinterDrivingManagement`, `GeneralNetworkManagement`,
+(objížďky), `SpeedManagement` (omezení rychlosti), `GeneralNetworkManagement`,
 `GeneralInstructionOrMessageToRoadUsers`
-|Služby a zařízení |`EquipmentOrSystemFault`, `RoadOperatorServiceDisruption`, `ServiceDisruption`,
-`RoadsideAssistance`, `TransitInformation`
-|Ostatní |`Conditions` (obecné podmínky provozu)
+|Služby |`ServiceDisruption` (např. uzavřená odpočívka)
 |===
 
 Profil obsahuje prvky modelu, které NDIC publikuje, a navíc objížďky (`ReroutingManagement`)
 a dočasné omezení rychlosti (`SpeedManagement.temporarySpeedLimit`).
 
-Nehoda s únikem látky (paliva, oleje, chemikálie) se publikuje jako dva záznamy: `Accident`
-a `GeneralObstruction` s `obstructionType` = `spillageOnTheRoad`. Rychlost větru se uvádí v m/s.
-
-[[dopady]]
-=== Dopady a příčiny
-
-Dopad události se popisuje v elementu `impact` – odhadem zbytkové kapacity komunikace
-(`capacityRemaining`, při úplném uzavření 0) nebo očekávaným zdržením (`delays`).
-
-.Dopad události (vzorek `accident.xml`)
-[source,xml]
-----
-include::{samplesdir}/accident.xml[tag=impact,indent=0]
-----
-
-Týká-li se událost obou směrů (`applicableForTrafficDirection` = `bothWays` nebo `allDirections`), uvádí se
-dopad i pro opačný směr v elementu `impactOnOppositeDirection`; záznam se pro druhý směr neduplikuje.
-
-.Uzavření v obou směrech s dopadem v opačném směru (vzorek `accident.xml`)
-[source,xml]
-----
-include::{samplesdir}/accident.xml[tag=closure,indent=0]
-----
-
-Je-li známa příčina, uvádí se hodnotou výčtu v elementu `cause` (`causeType`); u nehod slouží
-k popisu příčiny `accidentCause`. Následná událost jiné události se označuje `earlierIncident`.
-
-.Příčina uzavírky (vzorek `accident.xml`)
-[source,xml]
-----
-include::{samplesdir}/accident.xml[tag=cause,indent=0]
-----
+==== Nehody
 
 U nehody určuje `accidentType` druh nehody a `groupOfVehiclesInvolved` zúčastněná vozidla (typ vozidla,
-případně jeho stav, např. převrácené vozidlo).
+případně jeho stav, např. převrácené vozidlo). Nehoda s únikem látky (paliva, oleje, chemikálie) se publikuje
+jako dva záznamy: `Accident` a `GeneralObstruction` s `obstructionType` = `spillageOnTheRoad`.
 
 .Nehoda nákladního vozidla (vzorek `accident.xml`)
 [source,xml]
@@ -172,8 +140,50 @@ případně jeho stav, např. převrácené vozidlo).
 include::{samplesdir}/accident.xml[tag=accident,indent=0]
 ----
 
-U akcí správce komunikace (práce, uzavírky, řízení provozu) určuje `complianceOption`, zda je opatření
-závazné (`mandatory`) nebo doporučené (`advisory`).
+==== Akce správce komunikace
+
+Práce na silnici (`ConstructionWorks`, `MaintenanceWorks`) se zpravidla publikují spolu se záznamem
+`RoadOrCarriagewayOrLaneManagement`, který popisuje jejich dopad na provoz (uzavírka, uzavření pruhu,
+kyvadlový provoz). U akcí správce určuje `complianceOption`, zda je opatření závazné (`mandatory`) nebo
+doporučené (`advisory`).
+
+.Uzavření jízdního pruhu (vzorek `lane-closure.xml`)
+[source,xml]
+----
+include::{samplesdir}/lane-closure.xml[tag=lane-closure,indent=0]
+----
+
+[[dopady]]
+=== Dopady a příčiny
+
+Dopad události se popisuje v elementu `impact` – odhadem zbytkové kapacity komunikace
+(`capacityRemaining`, při úplném uzavření 0), počtem průjezdných (`numberOfOperationalLanes`) nebo omezených
+(`numberOfLanesRestricted`) jízdních pruhů, případně očekávaným zdržením (`delays`).
+
+.Dopad události (vzorek `accident.xml`)
+[source,xml]
+----
+include::{samplesdir}/accident.xml[tag=impact,indent=0]
+----
+
+Týká-li se událost obou směrů, vyjadřuje to její poloha: `alertCAffectedDirection` = `both`, úseky Global
+Network se směrem `both`, případně trasa protisměru (<<gn>>). Záznam se pro druhý směr neduplikuje. Akce
+správce může obousměrnost uvést i výslovně (`applicableForTrafficDirection` = `bothWays`) a dopad v opačném
+směru v elementu `impactOnOppositeDirection`.
+
+.Uzavření v obou směrech s dopadem v opačném směru (vzorek `accident.xml`)
+[source,xml]
+----
+include::{samplesdir}/accident.xml[tag=closure,indent=0]
+----
+
+Je-li známa příčina, uvádí se hodnotou výčtu v elementu `cause` (`causeType`). Následná událost jiné události se označuje `earlierIncident`.
+
+.Příčina uzavírky (vzorek `accident.xml`)
+[source,xml]
+----
+include::{samplesdir}/accident.xml[tag=cause,indent=0]
+----
 
 [[platnost]]
 === Časová platnost
@@ -184,9 +194,14 @@ závazné (`mandatory`) nebo doporučené (`advisory`).
 
 Platí-li událost jen v určité části dne (např. práce jen přes den, v noci nebo mimo dopravní špičku),
 doplňuje se interval elementem `validPeriod`: název období `periodName` a denní časový úsek
-`recurringTimePeriodOfDay` (`startTimeOfPeriod`, `endTimeOfPeriod`). Jiné opakované intervaly
-(dny v týdnu, data) se nepoužívají; opakovaná událost se jinak popíše více po sobě jdoucími záznamy.
+`recurringTimePeriodOfDay` (`startTimeOfPeriod`, `endTimeOfPeriod`). Opakuje-li se událost jinak (např.
+jen v některé dny), popisuje se více po sobě jdoucími záznamy.
 Interval platnosti může ležet v minulosti, přítomnosti i budoucnosti.
+
+Událost se publikuje s očekávanou nebo plánovanou dobou ukončení (`overallEndTime`), kterou poskytovatel podle
+vývoje upřesňuje novými verzemi záznamu. Událost skončí buď vypršením platnosti (skončila podle plánu), nebo ji
+poskytovatel ukončí dříve tak, že konec platnosti nastaví na čas zprávy. Formát neobsahuje stavová ani periodicky
+generovaná data.
 
 .Časová platnost záznamu (vzorek `accident.xml`)
 [source,xml]
@@ -199,8 +214,8 @@ include::{samplesdir}/accident.xml[tag=validity,indent=0]
 
 Poloha se popisuje přímo ve zprávě elementem `locationReference`, zpravidla typu `loc:SingleRoadLinearLocation`
 (liniová poloha na jedné komunikaci). Liniová poloha se používá i pro bodové události (např. nehodu):
-v ALERT-C je primární a sekundární lokace shodná, OpenLR a úseky Global Network popisují krátký úsek
-komunikace v místě události. Bodové ani plošné polohy se nepoužívají.
+v ALERT-C se událost promítne do celého úseku mezi sousedními lokacemi, OpenLR a úseky Global Network popisují
+krátký úsek komunikace v místě události.
 
 Typ polohy odpovídá jejímu tvaru. Liniová poloha `loc:SingleRoadLinearLocation` je vždy souvislý úsek *jedné
 komunikace* – silnice s číslem nebo ulice s názvem – a všechny metody jejího popisu popisují tentýž úsek.
@@ -228,6 +243,9 @@ popisují tentýž úsek skutečnosti. Musí být uvedena alespoň jedna metoda.
 |Průběh polohy |`gmlLineString` |linie ve WGS-84 pro zobrazení v mapě (<<prubeh>>)
 |===
 
+Dotčený jízdní pás, jízdní pruhy nebo druh místa (např. most) upřesňuje `supplementaryPositionalDescription`
+(<<upresneni>>).
+
 === Popis polohy pomocí ALERT-C
 
 Metoda popisuje liniovou polohu kódy lokační tabulky ALERT-C <<ISO14819-3>> v elementu `alertCLinear` typu
@@ -247,7 +265,9 @@ Metoda popisuje liniovou polohu kódy lokační tabulky ALERT-C <<ISO14819-3>> v
   v tomto směru, `both` pro události platné v obou směrech.
 * Poloha má nejvýše jeden element `alertCLinear` – jednu cestu ALERT-C po jedné komunikaci. Vede-li
   událost po více komunikacích, má vlastní `alertCLinear` každá část trasy (<<trasa>>) nebo člen skupiny.
-* Bodová událost (i vnitřek křižovatky či tunelu) má shodnou primární a sekundární lokaci.
+* Bodová událost mezi dvěma lokacemi (např. nehoda na úseku) se popisuje celým úsekem mezi sousedními
+  lokacemi. Shodnou primární a sekundární lokaci má jen událost v bodě lokace ALERT-C, zpravidla uprostřed
+  křižovatky.
 
 IMPORTANT: Význam `alertCDirectionCoded` je opačný než význam bitu `direction` v RDS-TMC, který slouží
 k dohledání sekundární lokace.
@@ -347,6 +367,27 @@ bez sítě GN, lokační tabulky ALERT-C i dekodéru OpenLR:
 include::{samplesdir}/restriction.xml[tag=loc-gml,indent=0]
 ----
 
+[[upresneni]]
+=== Upřesnění polohy
+
+Element `supplementaryPositionalDescription` upřesňuje, které části komunikace se událost týká. Upřesnění platí
+pro celou polohu a všechny metody jejího popisu:
+
+* `carriageway` – dotčený jízdní pás (`carriageway`, např. `mainCarriageway` hlavní jízdní pás, `entrySlipRoad`
+  vjezdová a `exitSlipRoad` výjezdová větev) a v něm dotčené jízdní pruhy (`lane/laneUsage`, např. `rightLane`
+  pravý, `leftLane` levý, `middleLane` prostřední pruh, `hardShoulder` zpevněná krajnice). Bez uvedení pruhu se
+  událost týká celého jízdního pásu.
+* `infrastructureDescriptor` – druh místa na komunikaci, např. `onBridge` (na mostě) nebo `atServiceArea`
+  (na odpočívce); `geographicDescriptor` – poloha v terénu, např. `onBorder` (na hranici státu).
+* `lengthAffected` – délka dotčeného úseku v metrech, je-li ve zdroji uvedena jen délka (např. kolona
+  v délce 2 km).
+
+.Upřesnění polohy – uzavřený pravý jízdní pruh hlavního jízdního pásu (vzorek `lane-closure.xml`)
+[source,xml]
+----
+include::{samplesdir}/lane-closure.xml[tag=loc-spd,indent=0]
+----
+
 [[trasa]]
 === Poloha na více komunikacích
 
@@ -360,7 +401,7 @@ III. třídy), popisuje se jako trasa – `locationReference` typu `loc:Itinerar
   a části se nepřekrývají. Směrovost je ve všech částech shodná.
 * Novou část nezakládá úsek jiné komunikace uvnitř křižovatky, krátká spojka ani souběh dvou silnic. Má-li
   poloha popis ALERT-C, odpovídá každá část jedné cestě lokační tabulky ALERT-C.
-* Trasa má nejméně dvě části; `routeDestination` se nepoužívá. Poloha na jedné komunikaci je vždy přímo
+* Trasa má nejméně dvě části. Poloha na jedné komunikaci je vždy přímo
   `loc:SingleRoadLinearLocation`.
 
 .Trasa po dvou silnicích (vzorek `closure-route.xml`, zkráceno)
@@ -396,7 +437,7 @@ jedním záznamem, jehož poloha je skupinou úseků:
   skupinu formátu `cz-ndic_d2-pls`: `locationReference` typu `loc:LocationGroupByReference`
   s `predefinedLocationGroupReference` (`targetClass` = `loc:PredefinedLocationGroup`).
 
-Plošné polohy se nepoužívají; oblast pokrývá výčet liniových úseků.
+Oblast se vždy popisuje výčtem liniových úseků.
 
 .Uzavírka křižovatky se třemi rameny – skupina úseků (vzorek `closure-junction.xml`)
 [source,xml]

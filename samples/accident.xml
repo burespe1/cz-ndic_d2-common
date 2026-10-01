@@ -240,7 +240,6 @@
         </loc:linearWithinLinearElement>
       </sit:locationReference>
       <!-- tag::accident[] -->
-      <sit:accidentCause>limitedVisibility</sit:accidentCause>
       <sit:accidentType>accidentInvolvingHeavyLorries</sit:accidentType>
       <sit:groupOfVehiclesInvolved>
         <com:vehicleCharacteristics>

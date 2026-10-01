@@ -22,11 +22,11 @@ Situace má dva záznamy verze 2; `situationVersionTime` je roven času jejich p
 První záznam typu `RoadOrCarriagewayOrLaneManagement` popisuje dopad – uzavření silnice (`roadClosed`)
 v obou směrech (`applicableForTrafficDirection` = `bothWays`) se zbytkovou kapacitou 0 v obou směrech
 (`impact` a `impactOnOppositeDirection`) a příčinou `earlierIncident`. Druhý záznam typu `Accident`
-popisuje příčinu – nehodu nákladního vozidla (`accidentInvolvingHeavyLorries`, `vehicleType` = `lorry`)
-se zhoršenou viditelností jako příčinou nehody; `safetyRelatedMessage` ji označuje jako informaci SRTI.
+popisuje příčinu – nehodu nákladního vozidla (`accidentInvolvingHeavyLorries`, `vehicleType` = `lorry`);
+`safetyRelatedMessage` ji označuje jako informaci SRTI.
 
 Platnost::
-Oba záznamy platí od 11. 3. 2023 9:30 do 11. 11. 2023 12:35 (`overallStartTime`, `overallEndTime`).
+Oba záznamy platí od 11.{nbsp}3.{nbsp}2023 9:30 do 11.{nbsp}11.{nbsp}2023 12:35 (`overallStartTime`, `overallEndTime`).
 
 Poloha::
 Bodová událost je popsána liniovou polohou `SingleRoadLinearLocation` metodami OpenLR,
@@ -84,9 +84,43 @@ Záznam typu `ConstructionWorks` popisuje příčinu (stavební práce, `constru
 `probabilityOfOccurrence` = `certain` – uzavírka v době publikace již platí. Oba záznamy jsou ve verzi 6.
 
 Poloha::
-Poloha je popsána všemi čtyřmi metodami: OpenLR, ALERT-C, staničením silnice 10 (106 797–107 507 m)
-a úseky Global Network verze 22.12: pět úseků v pořadí jízdy (126853–2901326), a průběhem
-polohy `gmlLineString`.
+Poloha je popsána všemi metodami: OpenLR, ALERT-C, staničením silnice 10 (106 797–107 507 m),
+úseky Global Network verze 22.12 (pět úseků v pořadí jízdy, 126853–2901326) a průběhem polohy
+`gmlLineString`.
+
+=== lane-closure.xml – uzavřený jízdní pruh na dálnici
+
+Práce na vozovce dálnice D1 mezi km 330,4 a 331,1 ve směru Ostrava s uzavřeným pravým jízdním pruhem.
+
+[source,xml]
+----
+include::{samplesdir}/lane-closure.xml[tags=**]
+----
+
+Situace::
+Záznam typu `MaintenanceWorks` popisuje příčinu (práce na silnici, `roadworks`, předmět prací vozovka – `road`),
+záznam typu `RoadOrCarriagewayOrLaneManagement` dopad – uzavření jízdního pruhu (`laneClosures`), závazně.
+Oba záznamy jsou ve verzi 5 a uvádějí jeden průjezdný jízdní pruh (`numberOfOperationalLanes`):
++
+[source,xml]
+----
+include::{samplesdir}/lane-closure.xml[tag=impact-lanes,indent=0]
+include::{samplesdir}/lane-closure.xml[tag=lane-closure,indent=0]
+----
+
+Platnost::
+1.{nbsp}10.{nbsp}2026 od 7:00 do 17:00.
+
+Poloha::
+Liniová poloha v jednom směru (`alertCAffectedDirection` = `aligned`) popsaná metodami OpenLR, ALERT-C
+(lokace 25605 → 23015), staničením dálnice D1 (330 399–331 099 m), úsekem Global Network 3867332 verze 26.06
+(15,47 → 82,71{nbsp}%) a průběhem `gmlLineString`. Upřesnění polohy uvádí dotčený pravý jízdní pruh
+(`rightLane`) hlavního jízdního pásu (`mainCarriageway`):
++
+[source,xml]
+----
+include::{samplesdir}/lane-closure.xml[tag=loc-spd,indent=0]
+----
 
 === closure-junction.xml – uzavírka křižovatky se třemi rameny
 
