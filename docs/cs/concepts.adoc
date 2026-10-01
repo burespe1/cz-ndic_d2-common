@@ -96,10 +96,10 @@ include::{samplesdir}/accident.xml[tag=record-meta,indent=0]
   (zpravidla stejný text), aby byl každý záznam srozumitelný i samostatně.
 * `urlLink` – odkaz na webovou stránku s podrobnostmi o události (`urlLinkType` = `html`).
 
-.Komentář a odkaz na podrobnosti (vzorek `accident.xml`)
+.Komentář a odkaz na podrobnosti (vzorek `works-prague.xml`)
 [source,xml]
 ----
-include::{samplesdir}/accident.xml[tag=comment-url,indent=0]
+include::{samplesdir}/works-prague.xml[tag=comment-url,indent=0]
 ----
 
 [[typy]]
@@ -134,7 +134,7 @@ U nehody určuje `accidentType` druh nehody a `groupOfVehiclesInvolved` zúčast
 případně jeho stav, např. převrácené vozidlo). Nehoda s únikem látky (paliva, oleje, chemikálie) se publikuje
 jako dva záznamy: `Accident` a `GeneralObstruction` s `obstructionType` = `spillageOnTheRoad`.
 
-.Nehoda nákladního vozidla (vzorek `accident.xml`)
+.Nehoda (vzorek `accident.xml`)
 [source,xml]
 ----
 include::{samplesdir}/accident.xml[tag=accident,indent=0]
@@ -160,10 +160,10 @@ Dopad události se popisuje v elementu `impact` – odhadem zbytkové kapacity k
 (`capacityRemaining`, při úplném uzavření 0), počtem průjezdných (`numberOfOperationalLanes`) nebo omezených
 (`numberOfLanesRestricted`) jízdních pruhů, případně očekávaným zdržením (`delays`).
 
-.Dopad události (vzorek `accident.xml`)
+.Dopad události (vzorek `closure-route.xml`)
 [source,xml]
 ----
-include::{samplesdir}/accident.xml[tag=impact,indent=0]
+include::{samplesdir}/closure-route.xml[tag=impact,indent=0]
 ----
 
 Týká-li se událost obou směrů, vyjadřuje to její poloha: `alertCAffectedDirection` = `both`, úseky Global
@@ -171,18 +171,20 @@ Network se směrem `both`, případně trasa protisměru (<<gn>>). Záznam se pr
 správce může obousměrnost uvést i výslovně (`applicableForTrafficDirection` = `bothWays`) a dopad v opačném
 směru v elementu `impactOnOppositeDirection`.
 
-.Uzavření v obou směrech s dopadem v opačném směru (vzorek `accident.xml`)
+.Uzavření v obou směrech s dopadem v opačném směru (vzorek `closure-route.xml`)
+[source,xml]
+----
+include::{samplesdir}/closure-route.xml[tag=closure,indent=0]
+----
+
+Příčina se zpravidla popisuje samostatným záznamem téže situace – např. nehoda a z ní plynoucí uzavírka
+silnice jsou dva záznamy jedné situace (vzorek `accident.xml`). Je-li příčina známa jen jako druh, uvádí se
+hodnotou výčtu v elementu `cause` (`causeType`); následná událost jiné události se označuje `earlierIncident`.
+
+.Nehoda a uzavírka jako dva záznamy jedné situace (vzorek `accident.xml`)
 [source,xml]
 ----
 include::{samplesdir}/accident.xml[tag=closure,indent=0]
-----
-
-Je-li známa příčina, uvádí se hodnotou výčtu v elementu `cause` (`causeType`). Následná událost jiné události se označuje `earlierIncident`.
-
-.Příčina uzavírky (vzorek `accident.xml`)
-[source,xml]
-----
-include::{samplesdir}/accident.xml[tag=cause,indent=0]
 ----
 
 [[platnost]]

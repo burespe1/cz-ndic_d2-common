@@ -98,10 +98,10 @@ include::{samplesdir}/accident.xml[tag=record-meta,indent=0]
   in every record of the situation (usually the same text), so that each record can be understood on its own.
 * `urlLink` – link to a web page with details of the event (`urlLinkType` = `html`).
 
-.Comment and link to details (sample `accident.xml`)
+.Comment and link to details (sample `works-prague.xml`)
 [source,xml]
 ----
-include::{samplesdir}/accident.xml[tag=comment-url,indent=0]
+include::{samplesdir}/works-prague.xml[tag=comment-url,indent=0]
 ----
 
 [[typy]]
@@ -138,7 +138,7 @@ involved (vehicle type, where applicable its status, e.g. an overturned vehicle)
 (fuel, oil, chemicals) is published as two records: `Accident` and `GeneralObstruction` with
 `obstructionType` = `spillageOnTheRoad`.
 
-.Accident involving a lorry (sample `accident.xml`)
+.Accident (sample `accident.xml`)
 [source,xml]
 ----
 include::{samplesdir}/accident.xml[tag=accident,indent=0]
@@ -164,10 +164,10 @@ The impact of an event is described in the `impact` element – by an estimate o
 (`capacityRemaining`, 0 for a full closure), by the number of operational (`numberOfOperationalLanes`) or
 restricted (`numberOfLanesRestricted`) lanes, or by the expected delay (`delays`).
 
-.Impact of an event (sample `accident.xml`)
+.Impact of an event (sample `closure-route.xml`)
 [source,xml]
 ----
-include::{samplesdir}/accident.xml[tag=impact,indent=0]
+include::{samplesdir}/closure-route.xml[tag=impact,indent=0]
 ----
 
 If an event concerns both directions, this is expressed by its location: `alertCAffectedDirection` =
@@ -176,19 +176,21 @@ record is not duplicated for the other direction. A road operator action may als
 explicitly (`applicableForTrafficDirection` = `bothWays`) and the impact on the opposite direction in the
 `impactOnOppositeDirection` element.
 
-.Closure in both directions with impact on the opposite direction (sample `accident.xml`)
+.Closure in both directions with impact on the opposite direction (sample `closure-route.xml`)
+[source,xml]
+----
+include::{samplesdir}/closure-route.xml[tag=closure,indent=0]
+----
+
+The cause is usually described by a separate record of the same situation – e.g. an accident and the
+resulting road closure are two records of one situation (sample `accident.xml`). If only the kind of cause is
+known, it is given by an enumeration value in the `cause` element (`causeType`); an event following another
+event is marked `earlierIncident`.
+
+.Accident and closure as two records of one situation (sample `accident.xml`)
 [source,xml]
 ----
 include::{samplesdir}/accident.xml[tag=closure,indent=0]
-----
-
-If the cause is known, it is given by an enumeration value in the `cause` element (`causeType`). An event following another event is marked
-`earlierIncident`.
-
-.Cause of a closure (sample `accident.xml`)
-[source,xml]
-----
-include::{samplesdir}/accident.xml[tag=cause,indent=0]
 ----
 
 [[platnost]]

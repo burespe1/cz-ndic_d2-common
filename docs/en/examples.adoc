@@ -2,10 +2,10 @@
 
 The samples are part of the specification package `{schema-uri}.zip` (directory `samples`).
 
-=== accident.xml – lorry accident with a road closure
+=== accident.xml – accident with an obstruction and a road closure
 
-The publication contains one situation: an accident of a lorry on road 450 near the village of Staré Město
-(Bruntál district) and the resulting closure of the road in both directions.
+The publication contains one situation: an accident on road I/20 near Sedlec (České Budějovice district), an
+obstruction on the carriageway and intermittent short-term closures of the road.
 
 [source,xml]
 ----
@@ -13,65 +13,91 @@ include::{samplesdir}/accident.xml[tags=**]
 ----
 
 Envelope and header::
-Root `d2:payload` of type `sit:SituationPublication` with the `profileName` and `profileVersion` attributes
+Root `d2:payload` of type `sit:SituationPublication` with the attributes `profileName` and `profileVersion`
 identifying the format; `feedType` refers to the data source, `publicationTime` is the time the content was
 created and `publicationCreator` identifies NDIC.
 
 Situation::
-The situation has two records in version 2; `situationVersionTime` equals the time of their last change.
-The first record of type `RoadOrCarriagewayOrLaneManagement` describes the impact – a road closure
-(`roadClosed`) in both directions (`applicableForTrafficDirection` = `bothWays`) with remaining capacity 0
-in both directions (`impact` and `impactOnOppositeDirection`) and the cause `earlierIncident`. The second
-record of type `Accident` describes the cause – an accident involving a lorry
-(`accidentInvolvingHeavyLorries`, `vehicleType` = `lorry`); `safetyRelatedMessage` marks it as SRTI information.
+The situation has three records in version 6 from the Police (`PCR`); `situationVersionTime` equals the time of
+their last change. The record of type `Accident` describes the accident (`accident`), the record
+`GeneralObstruction` an obstruction on the carriageway (`objectOnTheRoad`) and the record
+`RoadOrCarriagewayOrLaneManagement` the consequence – intermittent short-term closures
+(`intermittentShortTermClosures`), mandatory (`complianceOption` = `mandatory`). Cause and consequence are separate
+records of one situation; the comment is given in each of them.
 
 Validity::
-Both records are valid from 11{nbsp}March 2023 9:30 to 11{nbsp}November 2023 12:35 (`overallStartTime`,
-`overallEndTime`).
+All records are valid on 1{nbsp}October 2026 from 12:10 to 15:10 (`overallStartTime`, `overallEndTime`).
 
 Location::
-The point-like event is described by the linear location `SingleRoadLinearLocation` using OpenLR, ALERT-C
-(table 25, version 9.0, locations 11896 → 11895; `alertCAffectedDirection` = `both` for the closure in both
-directions, `aligned` for the accident), Global Network section 1620017 and the location path
-`gmlLineString`. The closure covers the whole section (0 → 100{nbsp}%), the accident a short section of
-about 50{nbsp}m at the accident site (21.01 → 70.08{nbsp}%).
+The point-like event is described by a short section of road I/20 (about 10{nbsp}m) by ALERT-C (table 25,
+version 11.0, locations 46501 → 3559, `alertCAffectedDirection` = `aligned`), OpenLR, chainage of road 20
+(192 487–192 497 m), Global Network section 2808505 of version 26.06 (7.26 → 8.69{nbsp}%) and the location path
+`gmlLineString`.
 
-Other content::
-`source` gives the originator of the information (Police of the Czech Republic, PČR),
-`generalPublicComment` a free-text description and `urlLink` a link to details.
+=== brokendownvehicles.xml – broken-down vehicle on a motorway
 
-=== brokendownvehicles.xml – broken-down vehicles and slow traffic
-
-The publication contains one situation in Tupolevova street in Prague: two broken-down (crashed) vehicles
-block a lane and cause slow traffic.
+A broken-down car on motorway D1 between km 38.5 and 38.6 towards Brno blocks the hard shoulder.
 
 [source,xml]
 ----
 include::{samplesdir}/brokendownvehicles.xml[tags=**]
 ----
 
-A record of type `AbnormalTraffic` describes slow traffic (`slowTraffic`) with a queue 160 m long
-(`queueLength`) and the cause `rubberNecking`:
-
-[source,xml]
-----
-include::{samplesdir}/brokendownvehicles.xml[tag=abnormal,indent=0]
-----
-
-A record of type `VehicleObstruction` describes the obstruction – two broken-down vehicles:
-
+Situation::
+Two records in version 2 from ŘSD (`RSD`): `VehicleObstruction` – a broken-down vehicle (`brokenDownVehicle`) and
+`GeneralObstruction` (`other`). Both state a blocked lane (`trafficConstrictionType` = `lanesBlocked`) and one
+restricted lane in the `impact` element (`numberOfLanesRestricted`):
++
 [source,xml]
 ----
 include::{samplesdir}/brokendownvehicles.xml[tag=obstruction,indent=0]
 ----
 
-The envelope, validity and location use the same structures as the previous example; the location is
-described by OpenLR, ALERT-C, Global Network section 710586 and the location path `gmlLineString`.
+Validity::
+1{nbsp}October 2026 from 13:46 to 15:46.
 
-=== restriction.xml – roadworks, alternating one-lane traffic
+Location::
+A one-way location described by ALERT-C (locations 1277 → 25539), OpenLR, chainage of motorway D1
+(38 499–38 599 m), three Global Network sections of version 26.06 in travel order (2577641 from 82.78{nbsp}%,
+2577639 whole, 1755889 to 2.86{nbsp}%) and the location path `gmlLineString`. The supplementary positional
+description gives the hard shoulder (`hardShoulder`) of the main carriageway:
++
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tag=loc-spd,indent=0]
+----
 
-The publication contains a partial closure of road I/10 in Desná (Jablonec nad Nisou district) due to
-construction works with alternating traffic in one lane.
+=== queue.xml – queue detected from floating car data
+
+A queue on motorway D6 between km 75.1 and 76 towards Karlovy Vary, detected automatically from floating car
+data.
+
+[source,xml]
+----
+include::{samplesdir}/queue.xml[tags=**]
+----
+
+Situation::
+One record of type `AbnormalTraffic` – a queue (`queuingTraffic`) in version 8. The source is floating car data
+(`sourceIdentification` = `FCD`, `sourceName` "Data FCD"); each update increases the record version and moves
+the end of validity:
++
+[source,xml]
+----
+include::{samplesdir}/queue.xml[tag=source-fcd,indent=0]
+include::{samplesdir}/queue.xml[tag=abnormal,indent=0]
+----
+
+Validity::
+1{nbsp}October 2026 from 13:28:35 to 15:12:32.
+
+Location::
+ALERT-C (locations 37132 → 37133), OpenLR, chainage of motorway D6 (75 125–75 979 m), three whole Global Network
+sections of version 26.06 and the location path `gmlLineString`.
+
+=== restriction.xml – roadworks, alternate one-way traffic
+
+Planned roadworks on road I/14 in Dolní Radechová (Náchod district) with alternate one-way traffic in one lane.
 
 [source,xml]
 ----
@@ -79,16 +105,43 @@ include::{samplesdir}/restriction.xml[tags=**]
 ----
 
 Situation::
-A record of type `ConstructionWorks` describes the cause (construction works, `constructionWork`), a record
-of type `RoadOrCarriagewayOrLaneManagement` the impact (alternating traffic in one lane,
-`singleAlternateLineTraffic`, mandatory – `complianceOption` = `mandatory`). The value
-`probabilityOfOccurrence` = `certain` – the closure is already in force at the time of publication. Both
-records are in version 6.
+The record of type `MaintenanceWorks` describes the cause (roadworks, `roadworks`, subject of works the road
+surface – `road`), the record of type `RoadOrCarriagewayOrLaneManagement` the impact (alternate one-way traffic,
+`singleAlternateLineTraffic`, mandatory – `complianceOption` = `mandatory`). The works are planned, so
+`probabilityOfOccurrence` = `certain` and the validity starts in the future. Both records are in version 2.
+
+Validity::
+From 5{nbsp}October 2026 0:00 to 18{nbsp}December 2026 23:59. That traffic is controlled on working days
+7:00–16:00 is stated in the comment only.
 
 Location::
-The location is described by all methods: OpenLR, ALERT-C, chainage of road 10 (106 797–107 507 m),
-Global Network sections of version 22.12 (five sections in travel order, 126853–2901326) and the location
-path `gmlLineString`.
+The location is described by all methods: OpenLR, ALERT-C (locations 26094 → 23386, `alertCDirectionCoded` =
+`negative`), chainage of road 14 (115 498–115 821 m), Global Network sections of version 26.06 (four sections in
+travel order, 1678138 from 82.16{nbsp}%, 1456372 and 1456373 whole, 1456374 to 0.88{nbsp}%) and the location path
+`gmlLineString`.
+
+=== works-prague.xml – construction works in Prague with a link to details
+
+Construction works in Počernická street (Prague 10) with narrowed lanes; the source is the Prague road
+administration TSK (`TSK2`).
+
+[source,xml]
+----
+include::{samplesdir}/works-prague.xml[tags=**]
+----
+
+Situation::
+A record of type `ConstructionWorks` (`constructionWork`) and a record of type `RoadOrCarriagewayOrLaneManagement`
+– traffic in the opposite lane (`contraflow`), both in version 6. Both records carry a link to a page with details
+(`urlLink`, `urlLinkType` = `html`).
+
+Validity::
+From 9{nbsp}September 2026 0:00 to 10{nbsp}October 2026 23:59.
+
+Location::
+A location for both directions (`alertCAffectedDirection` = `both`) at one ALERT-C location (13131 → 13131),
+OpenLR and two Global Network sections of version 25.12 serving both directions
+(`directionRelativeOnLinearSection` = `both`).
 
 === lane-closure.xml – closed lane on a motorway
 

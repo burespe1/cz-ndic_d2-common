@@ -2,10 +2,10 @@
 
 Vzorky jsou součástí balíčku specifikace `{schema-uri}.zip` (adresář `samples`).
 
-=== accident.xml – nehoda nákladního vozidla s uzavřením silnice
+=== accident.xml – nehoda s překážkou a uzavírkou silnice
 
-Publikace obsahuje jednu situaci: nehodu nákladního vozidla na silnici 450 u obce Staré Město
-(okres Bruntál) a následné uzavření silnice v obou směrech.
+Publikace obsahuje jednu situaci: nehodu na silnici I/20 u obce Sedlec (okres České Budějovice), překážku na
+vozovce a krátkodobé uzavírání silnice.
 
 [source,xml]
 ----
@@ -18,59 +18,83 @@ identifikujícími formát; `feedType` odkazuje na zdroj dat, `publicationTime` 
 a `publicationCreator` identifikuje NDIC.
 
 Situace::
-Situace má dva záznamy verze 2; `situationVersionTime` je roven času jejich poslední změny.
-První záznam typu `RoadOrCarriagewayOrLaneManagement` popisuje dopad – uzavření silnice (`roadClosed`)
-v obou směrech (`applicableForTrafficDirection` = `bothWays`) se zbytkovou kapacitou 0 v obou směrech
-(`impact` a `impactOnOppositeDirection`) a příčinou `earlierIncident`. Druhý záznam typu `Accident`
-popisuje příčinu – nehodu nákladního vozidla (`accidentInvolvingHeavyLorries`, `vehicleType` = `lorry`);
-`safetyRelatedMessage` ji označuje jako informaci SRTI.
+Situace má tři záznamy ve verzi 6 se zdrojem PČR (`PCR`); `situationVersionTime` je roven času jejich poslední
+změny. Záznam typu `Accident` popisuje nehodu (`accident`), záznam `GeneralObstruction` překážku na vozovce
+(`objectOnTheRoad`) a záznam `RoadOrCarriagewayOrLaneManagement` důsledek – krátkodobé uzavírání silnice
+(`intermittentShortTermClosures`), závazně (`complianceOption` = `mandatory`). Příčina a důsledek jsou samostatné
+záznamy jedné situace; komentář je uveden u každého z nich.
 
 Platnost::
-Oba záznamy platí od 11.{nbsp}3.{nbsp}2023 9:30 do 11.{nbsp}11.{nbsp}2023 12:35 (`overallStartTime`, `overallEndTime`).
+Všechny záznamy platí 1.{nbsp}10.{nbsp}2026 od 12:10 do 15:10 (`overallStartTime`, `overallEndTime`).
 
 Poloha::
-Bodová událost je popsána liniovou polohou `SingleRoadLinearLocation` metodami OpenLR,
-ALERT-C (tabulka 25, verze 9.0, lokace 11896 → 11895; `alertCAffectedDirection` = `both` u uzavírky
-v obou směrech, `aligned` u nehody) a úsekem Global Network 1620017 a průběhem polohy `gmlLineString`.
-Uzavírka zahrnuje celý úsek (0 → 100{nbsp}%), nehoda krátký úsek asi 50{nbsp}m v místě nehody
-(21,01 → 70,08{nbsp}%).
+Bodová událost je popsána krátkým úsekem silnice I/20 (asi 10{nbsp}m) metodami ALERT-C (tabulka 25, verze 11.0,
+lokace 46501 → 3559, `alertCAffectedDirection` = `aligned`), OpenLR, staničením silnice 20 (192 487–192 497 m),
+úsekem Global Network 2808505 verze 26.06 (7,26 → 8,69{nbsp}%) a průběhem polohy `gmlLineString`.
 
-Další obsah::
-`source` uvádí původce informace (PČR), `generalPublicComment` volný popis a `urlLink` odkaz na
-podrobnosti.
+=== brokendownvehicles.xml – porouchané vozidlo na dálnici
 
-=== brokendownvehicles.xml – porouchaná vozidla a pomalý provoz
-
-Publikace obsahuje jednu situaci v ulici Tupolevova v Praze: dvě porouchaná (havarovaná) vozidla blokují
-jízdní pruh a způsobují pomalý provoz.
+Porouchaný osobní automobil na dálnici D1 mezi km 38,5 a 38,6 ve směru Brno blokuje zpevněnou krajnici.
 
 [source,xml]
 ----
 include::{samplesdir}/brokendownvehicles.xml[tags=**]
 ----
 
-Záznam typu `AbnormalTraffic` popisuje pomalý provoz (`slowTraffic`) s kolonou dlouhou 160 m
-(`queueLength`) a příčinou `rubberNecking`:
-
-[source,xml]
-----
-include::{samplesdir}/brokendownvehicles.xml[tag=abnormal,indent=0]
-----
-
-Záznam typu `VehicleObstruction` popisuje překážku – dvě porouchaná vozidla:
-
+Situace::
+Dva záznamy ve verzi 2 se zdrojem ŘSD (`RSD`): `VehicleObstruction` – porouchané vozidlo (`brokenDownVehicle`)
+a `GeneralObstruction` (`other`). Oba uvádějí zablokovaný jízdní pruh (`trafficConstrictionType` = `lanesBlocked`)
+a v elementu `impact` jeden omezený pruh (`numberOfLanesRestricted`):
++
 [source,xml]
 ----
 include::{samplesdir}/brokendownvehicles.xml[tag=obstruction,indent=0]
 ----
 
-Obálka, platnost a poloha používají stejné struktury jako předchozí příklad; poloha je popsána OpenLR,
-ALERT-C, úsekem Global Network 710586 a průběhem polohy `gmlLineString`.
+Platnost::
+1.{nbsp}10.{nbsp}2026 od 13:46 do 15:46.
+
+Poloha::
+Jednosměrná poloha popsaná metodami ALERT-C (lokace 1277 → 25539), OpenLR, staničením dálnice D1
+(38 499–38 599 m), třemi úseky Global Network verze 26.06 v pořadí jízdy (2577641 od 82,78{nbsp}%, 2577639 celý,
+1755889 do 2,86{nbsp}%) a průběhem `gmlLineString`. Upřesnění polohy uvádí zpevněnou krajnici (`hardShoulder`)
+hlavního jízdního pásu:
++
+[source,xml]
+----
+include::{samplesdir}/brokendownvehicles.xml[tag=loc-spd,indent=0]
+----
+
+=== queue.xml – kolona zjištěná z plovoucích vozidel
+
+Kolona na dálnici D6 mezi km 75,1 a 76 ve směru Karlovy Vary, zjištěná automaticky z dat plovoucích vozidel.
+
+[source,xml]
+----
+include::{samplesdir}/queue.xml[tags=**]
+----
+
+Situace::
+Jeden záznam typu `AbnormalTraffic` – kolona (`queuingTraffic`) ve verzi 8. Zdrojem jsou data plovoucích vozidel
+(`sourceIdentification` = `FCD`, `sourceName` „Data FCD“); s každou aktualizací se zvyšuje verze záznamu
+a posouvá konec platnosti:
++
+[source,xml]
+----
+include::{samplesdir}/queue.xml[tag=source-fcd,indent=0]
+include::{samplesdir}/queue.xml[tag=abnormal,indent=0]
+----
+
+Platnost::
+1.{nbsp}10.{nbsp}2026 od 13:28:35 do 15:12:32.
+
+Poloha::
+ALERT-C (lokace 37132 → 37133), OpenLR, staničení dálnice D6 (75 125–75 979 m), tři celé úseky Global Network
+verze 26.06 a průběh `gmlLineString`.
 
 === restriction.xml – práce na silnici, kyvadlový provoz
 
-Publikace obsahuje částečnou uzavírku silnice I/10 v Desné (okres Jablonec nad Nisou)
-kvůli stavebním pracím s kyvadlovým provozem jedním jízdním pruhem.
+Plánované práce na silnici I/14 v Dolní Radechové (okres Náchod) s kyvadlovým provozem jedním jízdním pruhem.
 
 [source,xml]
 ----
@@ -78,15 +102,40 @@ include::{samplesdir}/restriction.xml[tags=**]
 ----
 
 Situace::
-Záznam typu `ConstructionWorks` popisuje příčinu (stavební práce, `constructionWork`), záznam typu
-`RoadOrCarriagewayOrLaneManagement` dopad (střídavý provoz jedním pruhem,
-`singleAlternateLineTraffic`, závazně – `complianceOption` = `mandatory`). Hodnota
-`probabilityOfOccurrence` = `certain` – uzavírka v době publikace již platí. Oba záznamy jsou ve verzi 6.
+Záznam typu `MaintenanceWorks` popisuje příčinu (práce na silnici, `roadworks`, předmět prací vozovka – `road`),
+záznam typu `RoadOrCarriagewayOrLaneManagement` dopad (střídavý provoz jedním pruhem,
+`singleAlternateLineTraffic`, závazně – `complianceOption` = `mandatory`). Práce jsou naplánované, proto
+`probabilityOfOccurrence` = `certain` a počátek platnosti leží v budoucnosti. Oba záznamy jsou ve verzi 2.
+
+Platnost::
+Od 5.{nbsp}10.{nbsp}2026 0:00 do 18.{nbsp}12.{nbsp}2026 23:59. Upřesnění, že se provoz řídí ve všední dny
+7:00–16:00, nese jen komentář.
 
 Poloha::
-Poloha je popsána všemi metodami: OpenLR, ALERT-C, staničením silnice 10 (106 797–107 507 m),
-úseky Global Network verze 22.12 (pět úseků v pořadí jízdy, 126853–2901326) a průběhem polohy
-`gmlLineString`.
+Poloha je popsána všemi metodami: OpenLR, ALERT-C (lokace 26094 → 23386, `alertCDirectionCoded` = `negative`),
+staničením silnice 14 (115 498–115 821 m), úseky Global Network verze 26.06 (čtyři úseky v pořadí jízdy,
+1678138 od 82,16{nbsp}%, 1456372 a 1456373 celé, 1456374 do 0,88{nbsp}%) a průběhem polohy `gmlLineString`.
+
+=== works-prague.xml – stavební práce v Praze s odkazem na podrobnosti
+
+Stavební práce v ulici Počernická (Praha 10) se zúženými jízdními pruhy; zdrojem je TSK hl. m. Prahy (`TSK2`).
+
+[source,xml]
+----
+include::{samplesdir}/works-prague.xml[tags=**]
+----
+
+Situace::
+Záznam typu `ConstructionWorks` (`constructionWork`) a záznam typu `RoadOrCarriagewayOrLaneManagement` –
+provoz v protisměrném pruhu (`contraflow`), oba ve verzi 6. Oba záznamy nesou odkaz na stránku s podrobnostmi
+(`urlLink`, `urlLinkType` = `html`).
+
+Platnost::
+Od 9.{nbsp}9.{nbsp}2026 0:00 do 10.{nbsp}10.{nbsp}2026 23:59.
+
+Poloha::
+Obousměrná poloha (`alertCAffectedDirection` = `both`) v jedné lokaci ALERT-C (13131 → 13131), OpenLR a dva
+úseky Global Network verze 25.12 sloužící oběma směrům (`directionRelativeOnLinearSection` = `both`).
 
 === lane-closure.xml – uzavřený jízdní pruh na dálnici
 
