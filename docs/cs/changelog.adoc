@@ -58,4 +58,4 @@
 ** Většina událostí vzniká z hlášení ALERT-C (kódy událostí a kvantifikátory podle <<ISO14819-2>>).
 ** Směrovost události (`alertCAffectedDirection`) vychází ze směrovosti v katalogu událostí ALERT-C <<ISO14819-2>>.
 ** Objížďky (`sit:ReroutingManagement`) a dočasné omezení rychlosti (`sit:SpeedManagement/temporarySpeedLimit`) jsou
-   v profilu ponechány pro budoucí zdroje událostí.
+   součástí profilu; odběratel s nimi má počítat jako s nepovinnými.

@@ -64,4 +64,4 @@
 ** Most events originate from ALERT-C messages (event codes and quantifiers according to <<ISO14819-2>>).
 ** The directionality of an event (`alertCAffectedDirection`) follows the directionality in the ALERT-C event list <<ISO14819-2>>.
 ** Diversions (`sit:ReroutingManagement`) and temporary speed limits (`sit:SpeedManagement/temporarySpeedLimit`) are
-   kept in the profile for future event sources.
+   part of the profile; consumers shall treat them as optional.
