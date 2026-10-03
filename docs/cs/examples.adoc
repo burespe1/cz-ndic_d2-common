@@ -14,11 +14,11 @@ include::{samplesdir}/accident.xml[tags=**]
 
 Obálka a hlavička::
 Kořen `d2:payload` typu `sit:SituationPublication` s atributy `@profileName` a `@profileVersion`
-identifikujícími formát; `feedType` odkazuje na zdroj dat, `publicationTime` je čas vytvoření obsahu
+identifikujícími formát; `feedType` odkazuje na distribuci (zdroj dat), `publicationTime` je čas vytvoření obsahu
 a `publicationCreator` identifikuje NDIC.
 
 Situace::
-Situace má tři záznamy ve verzi 6 se zdrojem PČR (`PCR`); `situationVersionTime` je roven času jejich poslední
+Situace má tři záznamy ve verzi 6 s původcem PČR (`PCR`); `situationVersionTime` je roven času jejich poslední
 změny. Záznam typu `sit:Accident` popisuje nehodu (`accident`), záznam `sit:GeneralObstruction` překážku na vozovce
 (`objectOnTheRoad`) a záznam `sit:RoadOrCarriagewayOrLaneManagement` důsledek – krátkodobé uzavírání silnice
 (`intermittentShortTermClosures`), závazně (`complianceOption` = `mandatory`). Příčina a důsledek jsou samostatné
@@ -42,7 +42,7 @@ include::{samplesdir}/brokendownvehicles.xml[tags=**]
 ----
 
 Situace::
-Dva záznamy ve verzi 2 se zdrojem ŘSD (`RSD`): `sit:VehicleObstruction` – porouchané vozidlo (`brokenDownVehicle`)
+Dva záznamy ve verzi 2 s původcem ŘSD (`RSD`): `sit:VehicleObstruction` – porouchané vozidlo (`brokenDownVehicle`)
 a `sit:GeneralObstruction` (`other`). Oba uvádějí zablokovaný jízdní pruh (`trafficConstrictionType` = `lanesBlocked`)
 a v elementu `impact` jeden omezený pruh (`numberOfLanesRestricted`):
 +
@@ -75,7 +75,7 @@ include::{samplesdir}/queue.xml[tags=**]
 ----
 
 Situace::
-Jeden záznam typu `sit:AbnormalTraffic` – kolona (`queuingTraffic`) ve verzi 8. Zdrojem jsou data plovoucích vozidel
+Jeden záznam typu `sit:AbnormalTraffic` – kolona (`queuingTraffic`) ve verzi 8. Původcem jsou data plovoucích vozidel
 (`sourceIdentification` = `FCD`, `sourceName` „Data FCD“); s každou aktualizací se zvyšuje verze záznamu
 a posouvá konec platnosti:
 +
@@ -118,7 +118,7 @@ staničením silnice 14 (115 498–115 821 m), úseky Global Network verze 26.06
 
 === works-prague.xml – stavební práce v Praze s odkazem na podrobnosti
 
-Stavební práce v ulici Počernická (Praha 10) se zúženými jízdními pruhy; zdrojem je TSK hl. m. Prahy (`TSK2`).
+Stavební práce v ulici Počernická (Praha 10) se zúženými jízdními pruhy; původcem je TSK hl. m. Prahy (`TSK2`).
 
 [source,xml]
 ----
