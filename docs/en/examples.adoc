@@ -14,8 +14,8 @@ include::{samplesdir}/accident.xml[tags=**]
 
 Envelope and header::
 Root `d2:payload` of type `sit:SituationPublication` with the attributes `@profileName` and `@profileVersion`
-identifying the format; `feedType` refers to the distribution (data source), `publicationTime` is the time the content was
-created and `publicationCreator` identifies NDIC.
+identifying the format; `feedType` refers to the distribution (data source), `publicationTime` is the time the publication was
+generated and `publicationCreator` identifies NDIC.
 
 Situation::
 The situation has three records in version 6 from the Police (`PCR`); `situationVersionTime` equals the time of

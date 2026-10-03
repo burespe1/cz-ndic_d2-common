@@ -14,7 +14,7 @@ include::{samplesdir}/accident.xml[tags=**]
 
 Obálka a hlavička::
 Kořen `d2:payload` typu `sit:SituationPublication` s atributy `@profileName` a `@profileVersion`
-identifikujícími formát; `feedType` odkazuje na distribuci (zdroj dat), `publicationTime` je čas vytvoření obsahu
+identifikujícími formát; `feedType` odkazuje na distribuci (zdroj dat), `publicationTime` je čas vygenerování publikace
 a `publicationCreator` identifikuje NDIC.
 
 Situace::
