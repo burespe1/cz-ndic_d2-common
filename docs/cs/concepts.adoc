@@ -12,7 +12,7 @@ Formát vychází z DATEX II publikace `sit:SituationPublication` <<EN16157-3>>.
 [[obalka]]
 === Obálka a hlavička publikace
 
-Každá zpráva je dokument DATEX II 3 s kořenovým elementem `d2:payload`. Atribut `xsi:type` kořenového elementu určuje typ
+Každá zpráva je dokument DATEX II 3 s kořenovým elementem `d2:payload`. Atribut `@xsi:type` kořenového elementu určuje typ
 publikace (zde `sit:SituationPublication`), atribut `modelBaseVersion="3"` verzi modelu a atribut `@lang` výchozí jazyk
 textů.
 
@@ -60,7 +60,7 @@ include::{samplesdir}/accident.xml[tag=situation-head,indent=0]
 ----
 
 Vlastní informace nesou záznamy `situationRecord`. V jedné situaci může být záznamů více, každý jiného
-typu (`xsi:type`) – typicky příčina (např. nehoda) a její důsledek (např. uzavření silnice). Identifikátor
+typu (`@xsi:type`) – typicky příčina (např. nehoda) a její důsledek (např. uzavření silnice). Identifikátor
 záznamu je odvozen od identifikátoru situace a typu záznamu.
 
 [[verzovani]]
@@ -105,7 +105,7 @@ include::{samplesdir}/works-prague.xml[tag=comment-url,indent=0]
 [[typy]]
 === Typy záznamů
 
-Typ záznamu (`xsi:type` elementu `situationRecord`) určuje, co se stalo. Formát používá tyto typy:
+Typ záznamu (`@xsi:type` elementu `situationRecord`) určuje, co se stalo. Formát používá tyto typy:
 
 [cols="2,3",options="header"]
 |===
