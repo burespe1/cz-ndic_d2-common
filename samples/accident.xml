@@ -8,16 +8,16 @@
     <com:nationalIdentifier>NDIC</com:nationalIdentifier>
   </com:publicationCreator>
   <!-- end::header[] -->
+  <!-- tag::situation-head[] -->
   <sit:situation id="ff808181-a043-1596-01a0-f6f60e2024a5">
-    <!-- tag::situation-head[] -->
     <sit:situationVersionTime>2026-10-01T13:14:10+02:00</sit:situationVersionTime>
     <sit:headerInformation>
       <com:confidentiality>noRestriction</com:confidentiality>
       <com:informationStatus>real</com:informationStatus>
     </sit:headerInformation>
     <!-- end::situation-head[] -->
+    <!-- tag::record-meta[] -->
     <sit:situationRecord xsi:type="sit:Accident" id="ff808181-a043-1596-01a0-f6f60e2024a5_Accident" version="6">
-      <!-- tag::record-meta[] -->
       <sit:situationRecordCreationTime>2026-10-01T12:19:04+02:00</sit:situationRecordCreationTime>
       <sit:situationRecordVersionTime>2026-10-01T13:14:10+02:00</sit:situationRecordVersionTime>
       <sit:probabilityOfOccurrence>certain</sit:probabilityOfOccurrence>
